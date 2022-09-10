@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
 const InputBox = () => {
   return (
@@ -23,17 +23,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: 'orange',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    alignItems: "center",
+    justifyContent: "space-around",
   },
   box: {
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: '80%',
+    alignItems: "center",
+    justifyContent: "space-around",
+    width: "80%",
     flex: 0.25,
     //나중에 포커스 될 때만 색깔 바꾸고
     borderWidth: 2,
-    borderColor: 'rgba(230, 230, 230, .5)',
+    borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
   },
 });
