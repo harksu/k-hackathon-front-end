@@ -9,11 +9,12 @@ import {
 } from "recoil";
 
 import SignUp from "./Screens/SignUp";
+import MainPage from "./Screens/MainPage";
 const App = () => {
   return (
     <RecoilRoot>
       <View style={styles.container}>
-        <SignUp />
+        <MainPage />
       </View>
     </RecoilRoot>
   );
