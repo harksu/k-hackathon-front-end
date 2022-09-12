@@ -1,17 +1,70 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, TextInput, Keyboard } from "react-native";
+import React, { useState, useRef } from "react";
 
 const InputBox = () => {
+  const nameInputRef = useRef();
+  const idInputRef = useRef();
+  const pwInputRef = useRef();
+
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState(""); //이거 나중에 서버에 보내면 그 때 다 clear
+  const [focusInput, setFocusInput] = useState(nameInputRef);
+
   return (
     <View style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>이름을 입력해주세요</Text>
+      <View
+        style={[styles.box, focusInput === nameInputRef && styles.focusbox]}
+      >
+        <TextInput
+          placeholder="이름을 입력해주세요"
+          value={name}
+          onChangeText={setName}
+          textAlign={"center"}
+          autoFocus={true}
+          blurOnSubmit={false}
+          ref={nameInputRef}
+          onTouchStart={() => {
+            setFocusInput(nameInputRef);
+          }}
+          onSubmitEditing={() => {
+            idInputRef.current.focus();
+            setFocusInput(idInputRef);
+          }}
+        />
       </View>
-      <View style={styles.box}>
-        <Text>사용하실 ID를 입력해주세요</Text>
+      <View style={[styles.box, focusInput === idInputRef && styles.focusbox]}>
+        <TextInput
+          placeholder="사용하실 ID를 입력해주세요"
+          value={id}
+          onChangeText={setId}
+          textAlign={"center"}
+          ref={idInputRef}
+          blurOnSubmit={false}
+          onTouchStart={() => {
+            setFocusInput(idInputRef);
+          }}
+          onSubmitEditing={() => {
+            pwInputRef.current.focus();
+            setFocusInput(pwInputRef);
+          }}
+        />
       </View>
-      <View style={styles.box}>
-        <Text>사용하실 PW를 입력해주세요</Text>
+      <View style={[styles.box, focusInput === pwInputRef && styles.focusbox]}>
+        <TextInput
+          placeholder="사용하실 PW를 입력해주세요"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+          placeholderTextColor="gray"
+          textAlign={"center"}
+          ref={pwInputRef}
+          blurOnSubmit={false}
+          onTouchStart={() => {
+            setFocusInput(pwInputRef);
+          }}
+          onSubmitEditing={Keyboard.dismiss}
+        />
       </View>
     </View>
   );
@@ -22,7 +75,6 @@ export default InputBox;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'orange',
     alignItems: "center",
     justifyContent: "space-around",
   },
@@ -31,9 +83,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "80%",
     flex: 0.25,
-    //나중에 포커스 될 때만 색깔 바꾸고
+    textAlign: "center",
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
+    borderRadius: 20,
+  },
+  focusbox: {
+    alignItems: "center",
+    justifyContent: "space-around",
+    width: "80%",
+    flex: 0.25,
+    textAlign: "center",
+    borderWidth: 2,
+    borderColor: "rgba(0, 0, 0, .5)",
     borderRadius: 20,
   },
 });

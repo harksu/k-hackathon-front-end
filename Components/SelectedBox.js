@@ -19,7 +19,7 @@ export default SelectedBox;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1.5,
+    flex: 1.3,
     //backgroundColor: "pink",
     alignItems: "center",
   },
