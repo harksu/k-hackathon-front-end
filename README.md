@@ -37,9 +37,11 @@ Merge : 합병 및 깃 충돌 해결 커밋 메시지
 
 프레임워크 -> ReactNative  
 
+라이브러리 -> @react-navigation/native, @react-navigation/native-stack, klaw,recoil,react-navigation
+
 사용 API -> 추후 추가 요망 
 
-메인 이슈 -> 추후 추가 요망
+메인 이슈 -> 헤더와 바텀 네비게이션 ? 
   
 
  

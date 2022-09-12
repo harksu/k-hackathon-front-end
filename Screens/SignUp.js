@@ -10,7 +10,7 @@ import UnderBar from "../Components/UnderBar";
 const SignUp = () => {
   return (
     <View style={styles.container}>
-      <Title title="회원 가입" />
+      {/* // <Title title="회원 가입" /> */}
       <InputBox />
       <TagBox />
       <SelectedBox />
@@ -23,5 +23,5 @@ const SignUp = () => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: "white" },
 });
