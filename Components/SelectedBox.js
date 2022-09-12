@@ -22,14 +22,15 @@ const styles = StyleSheet.create({
     flex: 1.3,
     //backgroundColor: "pink",
     alignItems: "center",
+    justifyContent: "center",
   },
   box: {
     flex: 0.2,
     alignItems: "flex-start",
     justifyContent: "center",
     width: "80%",
+    marginBottom: 10,
     //backgroundColor: "pink",
-    //나중에 포커스 될 때만 색깔 바꾸고
   },
   tagbox: {
     width: "80%",
@@ -37,9 +38,9 @@ const styles = StyleSheet.create({
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
     //backgroundColor: "pink",
-    flex: 1,
+    flex: 0.5,
     justifyContent: "space-around",
     alignContent: "center",
-    padding: 20,
+    padding: 15,
   },
 });

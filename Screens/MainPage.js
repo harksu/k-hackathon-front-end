@@ -5,10 +5,11 @@ import SelectedBox from "../Components/SelectedBox";
 import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
+
 const MainPage = () => {
   return (
     <View style={styles.container}>
-      <Title style={styles.title} title={"어디까지 가봤니?"} />
+      {/* <Title style={styles.title} title={"어디까지 가봤니?"} /> 이거 나중에 어떻게 할지 정해야됨*/}
       <SelectedBox />
       <Recommend />
       <ApplyBtn />
@@ -20,5 +21,5 @@ const MainPage = () => {
 export default MainPage;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: "white" },
 });

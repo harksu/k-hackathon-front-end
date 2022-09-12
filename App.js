@@ -12,11 +12,9 @@ const App = () => {
   return (
     <RecoilRoot>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="SignUpScreen"
-          // screenOptions={{ headerShown: true }} //이건 나중에 애들한테 물어보고
-        >
+        <Stack.Navigator initialRouteName="SignUpScreen">
           <Stack.Screen name="회원가입" component={SignUp} />
+          <Stack.Screen name="메인페이지" component={MainPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </RecoilRoot>

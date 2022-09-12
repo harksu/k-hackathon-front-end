@@ -27,11 +27,11 @@ export default UnderBar;
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,
-    // backgroundColor: "yellow",
+    //backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    shadowColor: "#000000",
+    shadowColor: "black",
     shadowOpacity: 0.5,
     shadowRadius: 2,
     shadowOffset: {

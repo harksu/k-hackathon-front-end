@@ -10,15 +10,15 @@ const ButtonBox = () => {
   return (
     <View style={styles.container}>
       <View style={styles.Buttonbox}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.text}>회원가입</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("회원가입"); //이거 나중에 그냥 메인페이지로 가게끔 바꾸자
+            navigation.navigate("메인페이지"); //이거 나중에 그냥 메인페이지로 가게끔 바꾸자
           }}
         >
+          <Text style={styles.text}>회원가입</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.text}>취소하기</Text>
         </TouchableOpacity>
       </View>
