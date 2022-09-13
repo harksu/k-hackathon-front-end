@@ -1,28 +1,26 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
-
+import { RecoilRoot } from "recoil";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./Screens/SignUp";
 import MainPage from "./Screens/MainPage";
 import GuideListPage from "./Screens/GuideListPage";
+
+
+const Stack = createNativeStackNavigator();
+
 const App = () => {
   return (
     <RecoilRoot>
-      <View style={styles.container}>
-        <GuideListPage />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SignUpScreen">
+          <Stack.Screen name="회원가입" component={SignUp} />
+          <Stack.Screen name="메인페이지" component={MainPage} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </RecoilRoot>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-});

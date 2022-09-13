@@ -20,16 +20,18 @@ const UnderBar = () => {
   );
 };
 
+//이미지 라우팅 할 때 이미지 색깔 변경하려면, 이미지 자체를 바꿔야 될 듯
+
 export default UnderBar;
 
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,
-    // backgroundColor: 'yellow',
+    //backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    shadowColor: "#000000",
+    shadowColor: "black",
     shadowOpacity: 0.5,
     shadowRadius: 2,
     shadowOffset: {
