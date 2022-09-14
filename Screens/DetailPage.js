@@ -35,10 +35,6 @@ const DetailPage = ({ route }) => {
       email: email,
       specialRequest: specialRequest,
     });
-    // setTimeout(() => {
-    //   console.log(sendRequest);
-    // }, 500);
-
     Keyboard.dismiss();
   };
   return (
