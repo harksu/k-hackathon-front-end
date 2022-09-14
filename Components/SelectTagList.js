@@ -20,6 +20,7 @@ export default SelectTagList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "80%",
     flexDirection: "row",
     justifyContent: "center",
     alignContent: "center",

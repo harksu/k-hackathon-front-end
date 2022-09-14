@@ -27,6 +27,7 @@ export default UnderBar;
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,
+    width: "100%",
     //backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "space-around",

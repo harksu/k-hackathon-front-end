@@ -26,7 +26,7 @@ export const Item = (
     </View>
     <View style={styles.button}>
       <View style={styles.btnContainer}>
-        <OrangeBtn text={"자세히"} style={styles.btnStyle} />
+        <OrangeBtn text={"자세히"} style={styles.btnStyle} name={name} />
       </View>
       <View style={styles.btnContainer}>
         <OrangeBtn text={"신청"} />
