@@ -18,7 +18,12 @@ const ButtonBox = () => {
         >
           <Text style={styles.text}>회원가입</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate("가이드리스트");
+          }} // 일단 테스트
+        >
           <Text style={styles.text}>취소하기</Text>
         </TouchableOpacity>
       </View>

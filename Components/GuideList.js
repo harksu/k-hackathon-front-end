@@ -15,7 +15,7 @@ import OrangeBtn from "./OrangeBtn";
 const ITEM_WIDTH = (Dimensions.get("window").width * 45) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 30) / 100;
 
-const Item = (
+export const Item = (
   { name, discription } //FlatList에서 띄우고자 하는 item 컴포넌트 확인하시면 바로 분리할게요
 ) => (
   <View style={styles.item}>

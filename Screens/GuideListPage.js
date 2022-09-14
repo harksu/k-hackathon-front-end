@@ -7,9 +7,9 @@ import UnderBar from "../Components/UnderBar";
 const GuideListPage = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Title title={"가이드 리스트"} />
-      </View>
+      {/* <View style={styles.titleContainer}>
+        <Title title={"가이드 리스트"} /> 이거 나중에 원유 설명해주고 
+      </View> */}
 
       <View style={styles.guideListContainer}>
         <GuideList />
@@ -27,6 +27,8 @@ export default GuideListPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: "scroll",
+    backgroundColor: "white",
   },
   titleContainer: {
     flex: 1,

@@ -7,7 +7,6 @@ import SignUp from "./Screens/SignUp";
 import MainPage from "./Screens/MainPage";
 import GuideListPage from "./Screens/GuideListPage";
 
-
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -17,6 +16,7 @@ const App = () => {
         <Stack.Navigator initialRouteName="SignUpScreen">
           <Stack.Screen name="회원가입" component={SignUp} />
           <Stack.Screen name="메인페이지" component={MainPage} />
+          <Stack.Screen name="가이드리스트" component={GuideListPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </RecoilRoot>
