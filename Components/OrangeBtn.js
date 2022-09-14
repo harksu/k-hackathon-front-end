@@ -2,10 +2,10 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 //버튼을 따로 분리
-const OrangeBtn = ({ text }) => {
+const OrangeBtn = ({ text, name }) => {
   const navigation = useNavigation();
   const goDetail = () => {
-    navigation.push("디테일페이지"); //여기서 props 같이 남겨야됨 ;
+    navigation.push("디테일페이지", { name: name }); //여기서 props 같이 남겨야됨 ;
     // console.log(name); // 이제 이걸로 북치고 장구치고 하면 될 듯
   };
   return (

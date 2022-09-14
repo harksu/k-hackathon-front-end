@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
-    backgroundColor: "pink",
+    //backgroundColor: "pink",
     flex: 0.5,
     flexDirection: "row",
     justifyContent: "space-around",
