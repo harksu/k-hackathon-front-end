@@ -16,7 +16,7 @@ const Pagenation = ({ limit, page, setPage, length }) => {
         >
           <Text>&lt;</Text>
         </TouchableOpacity>
-        <Text>
+        <Text style={styles.curPage}>
           {page}/{endPage}
         </Text>
         <TouchableOpacity
@@ -35,9 +35,10 @@ const Pagenation = ({ limit, page, setPage, length }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    fontWeight: "500",
+    alignItems: "center",
   },
   bar: {
-    alignSelf: "center",
     flew: 1,
     width: "70%",
     height: "10%",
@@ -49,6 +50,9 @@ const styles = StyleSheet.create({
     flex: 2,
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+  curPage: {
+    marginHorizontal: 25,
   },
 });
 const bStyle = (curPercent) =>

@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   textBox: {
     width: "80%",
-    height: "30%",
+    height: "40%",
     justifyContent: "space-around",
     alignItems: "center",
   },
