@@ -10,12 +10,11 @@ const GuideListPage = () => {
       {/* <View style={styles.titleContainer}>
         <Title title={"가이드 리스트"} /> 이거 나중에 원유 설명해주고 
       </View> */}
-
-      <View style={styles.guideListContainer}>
-        <GuideList />
-      </View>
       <View style={styles.selectedLocation}>
         <Text>설정 지역 : 제주도(온라인)</Text>
+      </View>
+      <View style={styles.guideListContainer}>
+        <GuideList />
       </View>
       <UnderBar />
     </View>
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
     flex: 5.5,
   },
   selectedLocation: {
-    flex: 1.5,
+    flex: 0.5,
     justifyContent: "center",
     alignItems: "center",
   },

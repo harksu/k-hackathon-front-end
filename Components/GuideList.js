@@ -1,6 +1,6 @@
 //가이드 리스트 페이지
 
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -12,6 +12,8 @@ import {
 import { ListData } from "../Data/GuideListData";
 import GuideImg from "../assets/Guide.png";
 import OrangeBtn from "./OrangeBtn";
+import Pagenation from "./Pagenation";
+const ITEM_LIMIT = 4;
 const ITEM_WIDTH = (Dimensions.get("window").width * 45) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 30) / 100;
 
@@ -36,16 +38,26 @@ export const Item = (
 );
 
 const GuideList = () => {
+  const [page, setPage] = useState(1);
+  const index = (page - 1) * ITEM_LIMIT;
   return (
     <View style={styles.container}>
       {/* 여러 리스트를 한번에 쉽게 띄울 수 있는 태그 공식문서 FlatList 참고 */}
       <FlatList
-        data={ListData}
+        data={ListData.slice(index, index + ITEM_LIMIT)}
         renderItem={({ item, index }) => (
           <Item key={item.id} name={item.name} discription={item.discription} />
         )}
         numColumns={2}
       />
+      <View style={styles.pagenate}>
+        <Pagenation
+          limit={ITEM_LIMIT}
+          setPage={setPage}
+          page={page}
+          length={ListData.length}
+        />
+      </View>
     </View>
   );
 };
@@ -75,7 +87,7 @@ const styles = StyleSheet.create({
   },
   textBox: {
     width: "80%",
-    height: "35%",
+    height: "30%",
     justifyContent: "space-around",
     alignItems: "center",
   },
@@ -85,12 +97,15 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
-    height: "15%",
+    height: "10%",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
   },
   btnContainer: {
     width: "30%",
+  },
+  pagenate: {
+    height: "10%",
   },
 });
