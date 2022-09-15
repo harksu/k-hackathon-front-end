@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   textBox: {
     width: "80%",
-    height: "30%",
+    height: "40%", //난 이거 30이 아니라 40으로 해야 딱 맞는데, 원유한테 나중에 물어보기(일단 40으로 밀고)
     justifyContent: "space-around",
     alignItems: "center",
   },
