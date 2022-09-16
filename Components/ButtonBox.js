@@ -4,8 +4,10 @@ import { useResetRecoilState } from "recoil";
 import { selectedTag } from "../Atoms/atoms";
 import { useNavigation } from "@react-navigation/native";
 
-const ButtonBox = () => {
+const ButtonBox = ({ buttonInfoObject }) => {
   const navigation = useNavigation();
+  const { leftTitle, rightTitle, leftDest, rightDest } = buttonInfoObject;
+  //재사용을 위한 props 설정
 
   return (
     <View style={styles.container}>
@@ -13,18 +15,18 @@ const ButtonBox = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("메인페이지"); //이거 나중에 그냥 메인페이지로 가게끔 바꾸자
+            navigation.navigate(leftDest);
           }}
         >
-          <Text style={styles.text}>회원가입</Text>
+          <Text style={styles.text}>{leftTitle}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("가이드리스트");
+            navigation.navigate(rightDest);
           }} // 일단 테스트
         >
-          <Text style={styles.text}>취소하기</Text>
+          <Text style={styles.text}>{rightTitle}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
-    //backgroundColor: 'green',
+    //backgroundColor: "green",
   },
   Buttonbox: {
     flex: 1,

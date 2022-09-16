@@ -8,13 +8,19 @@ import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 
 const SignUp = () => {
+  const buttonInfoObject = {
+    leftTitle: "회원가입",
+    rightTitle: "취소하기",
+    leftDest: "메인페이지",
+    rightDest: "가이드리스트",
+  };
   return (
     <View style={styles.container}>
       {/* // <Title title="회원 가입" /> */}
       <InputBox />
       <TagBox />
       <SelectedBox />
-      <ButtonBox />
+      <ButtonBox buttonInfoObject={buttonInfoObject} />
       <UnderBar />
     </View>
   );

@@ -1,10 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-const Title = ({title}) => {
+const Title = ({ title, position }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>
+        {title}
+        {position}
+      </Text>
     </View>
   );
 };
@@ -13,10 +16,13 @@ export default Title;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 0.5,
-    // backgroundColor: 'red',
+    justifyContent: "center",
+    alignItems: "flex-end",
+    flex: 0.2,
+    width: "80%",
+    //backgroundColor: "red",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
-  text: {},
+  text: { fontSize: 10, fontWeight: "bold" },
 });
