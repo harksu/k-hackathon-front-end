@@ -17,7 +17,8 @@ import UnderBar from "../Components/UnderBar";
 import { CITY, STATE } from "../Data/locationData";
 
 const MatchScreen = () => {
-  const [location, setLocation] = useState("여행지를 입력해주세요");
+  const [location, setLocation] = useState([]);
+  const [sendLocationData, setSendLocationData] = useState("");
   const buttonInfoObject = {
     leftTitle: "온라인매칭",
     rightTitle: "오프라인매칭",
@@ -27,76 +28,57 @@ const MatchScreen = () => {
 
   const drawer = useRef(null);
 
+  const DrawBar = ({ itemList, placeholder, index }) => (
+    <SearchableDropdown
+      onItemSelect={(item) => {
+        setLocation(location.concat(item.name));
+        setSendLocationData(sendLocationData.concat(" ").concat(item.name));
+      }}
+      containerStyle={{ padding: 5 }}
+      itemStyle={{
+        padding: 10,
+        marginTop: 2,
+        backgroundColor: "#ddd",
+        borderColor: "#bbb",
+        borderWidth: 1,
+        borderRadius: 5,
+      }}
+      itemTextStyle={{ color: "#222" }}
+      itemsContainerStyle={{ maxHeight: 140 }}
+      items={itemList}
+      // defaultIndex={2}
+      resetValue={false}
+      textInputProps={{
+        placeholder: placeholder,
+        underlineColorAndroid: "transparent",
+        style: {
+          padding: 12,
+          borderWidth: 1,
+          borderColor: "#ccc",
+          borderRadius: 5,
+        },
+        value: location[index],
+      }}
+      listProps={{
+        nestedScrollEnabled: true,
+      }}
+    />
+  );
+
   const navigationView = () => (
     <View style={styles.sideContainer}>
-      <SearchableDropdown
-        onItemSelect={(item) => {
-          setLocation(item.name);
-        }}
-        containerStyle={{ padding: 5 }}
-        itemStyle={{
-          padding: 10,
-          marginTop: 2,
-          backgroundColor: "#ddd",
-          borderColor: "#bbb",
-          borderWidth: 1,
-          borderRadius: 5,
-        }}
-        itemTextStyle={{ color: "#222" }}
-        itemsContainerStyle={{ maxHeight: 140 }}
-        items={CITY}
-        defaultIndex={2}
-        resetValue={false}
-        textInputProps={{
-          placeholder: "지역을 골라주세요",
-          underlineColorAndroid: "transparent",
-          style: {
-            padding: 12,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 5,
-          },
-        }}
-        listProps={{
-          nestedScrollEnabled: true,
-        }}
-      />
-      <SearchableDropdown
-        onItemSelect={(item) => {
-          setLocation(location.concat(" ").concat(item.name));
-        }}
-        containerStyle={{ padding: 5 }}
-        //제거는 필요 없을 것 같으니까 삭제하고
-        itemStyle={{
-          padding: 10,
-          marginTop: 2,
-          backgroundColor: "#ddd",
-          borderColor: "#bbb",
-          borderWidth: 1,
-          borderRadius: 5,
-        }}
-        itemTextStyle={{ color: "#222" }}
-        itemsContainerStyle={{ maxHeight: 140 }}
-        items={STATE}
-        defaultIndex={2}
-        resetValue={false}
-        textInputProps={{
-          placeholder: "상세 지역을 골라주세요",
-          underlineColorAndroid: "transparent",
-          style: {
-            padding: 12,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 5,
-          },
-        }}
-        listProps={{
-          nestedScrollEnabled: true,
-        }}
+      <DrawBar itemList={CITY} placeholder="지역을 골라주세요" index={0} />
+      <DrawBar
+        itemList={STATE}
+        placeholder="세부 지역을 골라주세요"
+        index={1}
       />
       <Button
-        title="Close drawer"
-        onPress={() => drawer.current.closeDrawer()}
+        title="선택 완료"
+        onPress={() => {
+          drawer.current.closeDrawer();
+          setLocation([]);
+        }}
       />
     </View>
   );
@@ -114,10 +96,17 @@ const MatchScreen = () => {
         <PlaceImage />
         <SelectedBox />
         <TouchableOpacity
-          onPress={() => drawer.current.openDrawer()}
+          onPress={() => {
+            drawer.current.openDrawer();
+            setSendLocationData("");
+          }}
           style={styles.container}
         >
-          <MatchInputBox locationInput={location} />
+          <MatchInputBox
+            locationInput={
+              sendLocationData ? sendLocationData : "지역을 입력해주세요"
+            }
+          />
         </TouchableOpacity>
         <View style={styles.textBox}>
           <Text style={styles.text}>
