@@ -14,11 +14,16 @@ import SelectedBox from "../Components/SelectedBox";
 import MatchInputBox from "../Components/MatchInputBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
-import { CITY, STATE } from "../Data/locationData";
+import { CITY, STATE, TEST } from "../Data/locationData";
 
 const MatchScreen = () => {
-  const [location, setLocation] = useState([]);
-  const [sendLocationData, setSendLocationData] = useState("");
+  const drawer = useRef(null);
+
+  const [cityValue, setCityValue] = useState(""); // 첫번째 선택
+  const [stateValue, setStateValue] = useState(""); // 두번째 선택
+  const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함)
+  const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
+
   const buttonInfoObject = {
     leftTitle: "온라인매칭",
     rightTitle: "오프라인매칭",
@@ -26,13 +31,51 @@ const MatchScreen = () => {
     rightDest: "가이드리스트",
   };
 
-  const drawer = useRef(null);
+  const conditionSelect = (itemlist, name) => {
+    if (itemlist !== CITY) {
+      console.log("이거 아니에요");
+      return;
+    }
+    if (name === "제주도") {
+      setDetailLocationList(STATE);
+    } else if (name === "부산") {
+      setDetailLocationList(TEST);
+    } else {
+      setDetailLocationList([]); //이거 마지막에 데이터 배열 추가할 때 아무것도 없으면 마지막에 else로 빼야 겠다
+    }
+  };
 
-  const DrawBar = ({ itemList, placeholder, index }) => (
+  const navigationView = () => (
+    <View style={styles.sideContainer}>
+      <DrawBar
+        itemList={CITY}
+        placeholder="지역을 골라주세요"
+        value={cityValue}
+      />
+      <DrawBar
+        itemList={detailLocationList}
+        placeholder="세부 지역을 골라주세요"
+        value={stateValue}
+      />
+      <Button
+        title="선택 완료"
+        onPress={() => {
+          drawer.current.closeDrawer();
+        }}
+      />
+    </View>
+  );
+
+  const DrawBar = ({ itemList, placeholder, value }) => (
     <SearchableDropdown
       onItemSelect={(item) => {
-        setLocation(location.concat(item.name));
+        conditionSelect(itemList, item.name);
         setSendLocationData(sendLocationData.concat(" ").concat(item.name));
+        {
+          value === cityValue
+            ? setCityValue(item.name)
+            : setStateValue(item.name);
+        }
       }}
       containerStyle={{ padding: 5 }}
       itemStyle={{
@@ -46,7 +89,6 @@ const MatchScreen = () => {
       itemTextStyle={{ color: "#222" }}
       itemsContainerStyle={{ maxHeight: 140 }}
       items={itemList}
-      // defaultIndex={2}
       resetValue={false}
       textInputProps={{
         placeholder: placeholder,
@@ -57,32 +99,13 @@ const MatchScreen = () => {
           borderColor: "#ccc",
           borderRadius: 5,
         },
-        value: location[index],
+        value: value,
       }}
       listProps={{
         nestedScrollEnabled: true,
       }}
     />
   );
-
-  const navigationView = () => (
-    <View style={styles.sideContainer}>
-      <DrawBar itemList={CITY} placeholder="지역을 골라주세요" index={0} />
-      <DrawBar
-        itemList={STATE}
-        placeholder="세부 지역을 골라주세요"
-        index={1}
-      />
-      <Button
-        title="선택 완료"
-        onPress={() => {
-          drawer.current.closeDrawer();
-          setLocation([]);
-        }}
-      />
-    </View>
-  );
-
   return (
     <DrawerLayoutAndroid
       ref={drawer}
@@ -104,7 +127,7 @@ const MatchScreen = () => {
         >
           <MatchInputBox
             locationInput={
-              sendLocationData ? sendLocationData : "지역을 입력해주세요"
+              stateValue ? cityValue.concat(stateValue) : "지역을 입력해주세요"
             }
           />
         </TouchableOpacity>
