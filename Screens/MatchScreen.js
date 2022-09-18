@@ -11,7 +11,8 @@ import SearchableDropdown from "react-native-searchable-dropdown";
 import Title from "../Components/Title";
 import PlaceImage from "../Components/PlaceImage";
 import SelectedBox from "../Components/SelectedBox";
-import MatchInputBox from "../Components/MatchInputBox";
+import MatchLocationBox from "../Components/MatchLocationBox";
+import MatchPeriodBox from "../Components/MatchPeriodBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
@@ -21,7 +22,7 @@ const MatchScreen = () => {
 
   const [cityValue, setCityValue] = useState(""); // 첫번째 선택
   const [stateValue, setStateValue] = useState(""); // 두번째 선택
-  const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함)
+  const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함
   const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
 
   const buttonInfoObject = {
@@ -41,30 +42,11 @@ const MatchScreen = () => {
     } else if (name === "부산") {
       setDetailLocationList(TEST);
     } else {
-      setDetailLocationList([]); //이거 마지막에 데이터 배열 추가할 때 아무것도 없으면 마지막에 else로 빼야 겠다
+      setDetailLocationList([]);
+      setStateValue(""); // 처음이 이상한거면 2번째는 아무것도 없어야됨
+      //이거 마지막에 데이터 배열 추가할 때 아무것도 없으면 마지막에 else로 빼야 겠다
     }
   };
-
-  const navigationView = () => (
-    <View style={styles.sideContainer}>
-      <DrawBar
-        itemList={CITY}
-        placeholder="지역을 골라주세요"
-        value={cityValue}
-      />
-      <DrawBar
-        itemList={detailLocationList}
-        placeholder="세부 지역을 골라주세요"
-        value={stateValue}
-      />
-      <Button
-        title="선택 완료"
-        onPress={() => {
-          drawer.current.closeDrawer();
-        }}
-      />
-    </View>
-  );
 
   const DrawBar = ({ itemList, placeholder, value }) => (
     <SearchableDropdown
@@ -99,12 +81,38 @@ const MatchScreen = () => {
           borderColor: "#ccc",
           borderRadius: 5,
         },
-        value: value,
       }}
       listProps={{
         nestedScrollEnabled: true,
       }}
     />
+  );
+
+  const navigationView = () => (
+    <View style={styles.sideContainer}>
+      <DrawBar
+        itemList={CITY}
+        placeholder="지역을 골라주세요"
+        value={cityValue ? cityValue : ""}
+      />
+      <DrawBar
+        itemList={detailLocationList}
+        placeholder="세부 지역을 골라주세요"
+        value={stateValue}
+      />
+      {/* 안드로이드로 테스트 해보니까 입력 이벤트 씹혀서 조건부로 변경  */}
+      {cityValue && (
+        <Text style={styles.choiceText}>
+          선택값 1 ➡ {cityValue} , 선택값 2 ➡ {stateValue}
+        </Text>
+      )}
+      <Button
+        title="선택 완료"
+        onPress={() => {
+          drawer.current.closeDrawer();
+        }}
+      />
+    </View>
   );
   return (
     <DrawerLayoutAndroid
@@ -123,14 +131,18 @@ const MatchScreen = () => {
             drawer.current.openDrawer();
             setSendLocationData("");
           }}
-          style={styles.container}
+          style={styles.touchContainer}
         >
-          <MatchInputBox
+          <MatchLocationBox
             locationInput={
               stateValue ? cityValue.concat(stateValue) : "지역을 입력해주세요"
             }
           />
         </TouchableOpacity>
+        <View style={styles.touchContainer}>
+          <MatchPeriodBox />
+          {/* 원유야 위 컴포넌트에다가 작업하면 돼, 컨테이너 영역은 내가 맞춰놨어  */}
+        </View>
         <View style={styles.textBox}>
           <Text style={styles.text}>
             {` 혼자서 어디를 가실지, 식사는 어떤 것을 골라야 할지 고민이 많으셨나요?
@@ -156,12 +168,28 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     //backgroundColor: "pink",
   },
+  touchContainer: {
+    flex: 0.5,
+    //backgroundColor: "yellow",
+    justifyContent: "center",
+  },
   textBox: {
-    flex: 0.7,
+    flex: 1,
     width: "80%",
-    //backgroundColor: "pink",
+    // backgroundColor: "pink",
     marginLeft: "auto",
     marginRight: "auto",
+    justifyContent: "center",
   },
-  text: { textAlign: "left", fontSize: 12 },
+  text: { textAlign: "left", fontSize: 10 },
+  choiceText: {
+    marginTop: "auto",
+    marginBottom: "auto",
+    alignSelf: "center",
+    backgroundColor: "pink",
+    color: "blue",
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
 });

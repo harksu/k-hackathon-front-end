@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const UnderBar = () => {
@@ -28,16 +28,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 0.5,
     width: "100%",
-    //backgroundColor: "yellow",
+    // backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     shadowColor: "black",
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
+    shadowOpacity: 1, //이게 자꾸 씹힘
+    shadowRadius: 10,
     shadowOffset: {
-      height: 1,
-      width: 1,
+      height: 2,
+      width: 2,
     },
     elevation: 1,
   },

@@ -1,19 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Keyboard,
-  Button,
-} from "react-native";
-import React, { useState, useRef } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-const MatchInputBox = ({ locationInput }) => {
-  const locationInputRef = useRef();
-  const periodInputRef = useRef();
+const MatchLocationBox = ({ locationInput }) => {
+  // const periodInputRef = useRef();
 
-  const [period, setPeriod] = useState("");
-  const [focusInput, setFocusInput] = useState(locationInputRef); // 사실 이거 필요없음
+  // const [period, setPeriod] = useState("");
 
   return (
     <View style={styles.container}>
@@ -33,7 +24,7 @@ const MatchInputBox = ({ locationInput }) => {
           /> */}
       </View>
 
-      <View style={styles.box}>
+      {/* <View style={styles.box}>
         <TextInput
           placeholder="기간을 입력해주세요"
           value={period}
@@ -46,30 +37,30 @@ const MatchInputBox = ({ locationInput }) => {
           }}
           onSubmitEditing={Keyboard.dismiss}
         />
-      </View>
+      </View> */}
     </View>
   );
 };
 
-export default MatchInputBox;
+export default MatchLocationBox;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.9,
+    flex: 0.8,
     alignItems: "center",
-    // backgroundColor: "pink",
-    justifyContent: "space-around",
+    //backgroundColor: "pink",
   },
   box: {
     alignItems: "center",
     width: "80%",
-    flex: 0.3,
+    flex: 1,
     textAlign: "center",
     fontWeight: "bold",
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
     justifyContent: "center",
+    //backgroundColor: "pink",
   },
   text: {
     textAlign: "center",
