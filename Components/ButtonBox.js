@@ -37,7 +37,7 @@ export default ButtonBox;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.8,
+    flex: 0.5,
     width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "40%",
-    height: "33%",
+    height: "66%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
