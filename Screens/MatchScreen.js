@@ -139,17 +139,15 @@ const MatchScreen = () => {
             }
           />
         </TouchableOpacity>
-        <View style={styles.touchContainer}>
+        <View style={styles.dateContainer}>
           <MatchPeriodBox />
-          {/* 원유야 위 컴포넌트에다가 작업하면 돼, 컨테이너 영역은 내가 맞춰놨어  */}
         </View>
         <View style={styles.textBox}>
           <Text style={styles.text}>
             {` 혼자서 어디를 가실지, 식사는 어떤 것을 골라야 할지 고민이 많으셨나요?
 
  이제는 혼자서 고민하지 많으시고 저희에게 맡겨주세요!
-
- 다양한 가이드가 당신의 여행을 더 완벽하게 만들어 줄거랍니다`}
+`}
           </Text>
         </View>
         <ButtonBox buttonInfoObject={buttonInfoObject} />
@@ -173,8 +171,12 @@ const styles = StyleSheet.create({
     //backgroundColor: "yellow",
     justifyContent: "center",
   },
+  dateContainer: {
+    flex: 1.5,
+    marginTop: 10,
+  },
   textBox: {
-    flex: 1,
+    flex: 0.7,
     width: "80%",
     // backgroundColor: "pink",
     marginLeft: "auto",
