@@ -3,6 +3,7 @@ import React from "react";
 import { RecoilRoot } from "recoil";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "./Screens/LoginScreen";
 import SignUp from "./Screens/SignUp";
 import MainPage from "./Screens/MainPage";
 import GuideListPage from "./Screens/GuideListPage";
@@ -16,10 +17,10 @@ const App = () => {
     <RecoilRoot>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="SignUpScreen">
+          <Stack.Screen name="로그인페이지" component={LoginScreen} />
           <Stack.Screen name="매칭페이지" component={MatchScreen} />
           <Stack.Screen name="회원가입" component={SignUp} />
           <Stack.Screen name="메인페이지" component={MainPage} />
-
           <Stack.Screen name="가이드리스트" component={GuideListPage} />
           <Stack.Screen name="디테일페이지" component={DetailPage} />
         </Stack.Navigator>
