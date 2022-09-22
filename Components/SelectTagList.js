@@ -1,11 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useRecoilValue } from "recoil";
-import React from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect } from "react";
 import SelectTag from "./SelectTag";
-import { selectedTag } from "../Atoms/atoms";
+import { selectedTag, sendSignUpData } from "../Atoms/atoms";
 
 const SelectTagList = () => {
   const selected = useRecoilValue(selectedTag);
+  const data = useRecoilValue(sendSignUpData);
+  const setData = useSetRecoilState(sendSignUpData);
+  useEffect(() => {
+    setData({
+      ...data,
+      tags: selected,
+    }); //이거 나중에 버튼에 이벤트랑 리코일 벨류 넣어서 프랍스로 분리해야됨
+  }, [selected]);
   return (
     <View style={styles.container}>
       {selected?.map((tag, index) => (
