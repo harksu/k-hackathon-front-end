@@ -6,6 +6,6 @@ export const selectedTag = atom({
 });
 
 export const sendSignUpData = atom({
-  key: "sendSignUpData", //선택된 태그들
-  default: {}, //이거 자꾸 무의식적으로 객체로 바꾸는데 ㄴㄴ
+  key: "sendSignUpData",
+  default: {},
 });
