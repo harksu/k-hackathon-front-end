@@ -6,13 +6,19 @@ import {
   TextInput,
   Keyboard,
 } from "react-native";
+import axios from "axios";
 import React, { useRef, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { AuthToken } from "../Atoms/atoms";
 
 const LoginScreen = () => {
   const [id, setID] = useState("");
   const [pw, setPw] = useState("");
 
   const pwInput = useRef();
+
+  const setToken = useSetRecoilState(AuthToken);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -47,6 +53,16 @@ const LoginScreen = () => {
         style={styles.loginBox}
         onPress={() => {
           console.log("로그인 눌렸습니다");
+          axios
+            .post("http://mju-hackathon.p-e.kr:8080/api/sign-in", {
+              username: id,
+              password: pw,
+            })
+            .then((response) => {
+              console.log(response.data.result.data.accessToken);
+              setToken(response.data.result.data.accessToken);
+            })
+            .catch((error) => console.log(error));
         }}
       >
         <Text style={styles.logintext}>로그인</Text>
@@ -58,6 +74,7 @@ const LoginScreen = () => {
         <TouchableOpacity
           onPress={() => {
             console.log("회원가입 하러가기 눌렸습니다");
+            navigation.navigate("회원가입");
           }}
         >
           <Text style={{ fontWeight: "bold", color: "orange" }}>

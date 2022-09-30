@@ -9,49 +9,26 @@ const ButtonBox = ({ buttonInfoObject }) => {
   const navigation = useNavigation();
   const { leftTitle, rightTitle, leftDest, rightDest } = buttonInfoObject;
   //재사용을 위한 props 설정
-  console.log(leftTitle);
   const userInfo = useRecoilValue(sendSignUpData);
-  const tempdata = {
-    username: "user",
-    password: "user123!",
-    name: "홍길동",
-    email: "test@test.com2",
-    phone: "010-1234-1252",
-    tags: [
-      {
-        tag: "hi",
-      },
-      {
-        tag: "hi",
-      },
-      {
-        tag: "hi",
-      },
-      {
-        tag: "hi",
-      },
-    ],
-  };
   return (
     <View style={styles.container}>
       <View style={styles.Buttonbox}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate(leftDest);
             if (leftTitle === "회원가입") {
-              console.log(userInfo);
+              //console.log(tempdata);
               axios({
-                method: "POST",
-                url: `http://3.36.109.37:8080/api/sign-up 
-                `,
+                method: "post",
+                url: `http://3.36.109.37:8080/api/sign-up`,
+                headers: { "Access-Control-Allow-Origin": "*" },
                 //지금 이거 CORS 테스트중이고, 현재 데이터 보내려면 무조건 ENTER로 넘겨야됨
                 data: {
-                  // ...userInfo,
-                  tempdata, //이거 나중에 삭제하장
+                  ...userInfo,
                 },
               }).then((response) => {
-                console.log(response);
+                console.log(response.success);
+                navigation.navigate(leftDest);
               });
             }
           }}
