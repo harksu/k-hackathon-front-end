@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const SelectTag = ({ name, namecode }) => {
+const SelectTag = ({ tag }) => {
   return (
     <View style={styles.clickedContainer}>
-      <Text style={styles.text}>{name}</Text>
+      <Text style={styles.text}>{tag}</Text>
     </View>
   );
 };

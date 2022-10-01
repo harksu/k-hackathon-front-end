@@ -12,12 +12,12 @@ const SelectTagList = () => {
     setData({
       ...data,
       tags: selected,
-    }); //이거 나중에 버튼에 이벤트랑 리코일 벨류 넣어서 프랍스로 분리해야됨
+    });
   }, [selected]);
   return (
     <View style={styles.container}>
       {selected?.map((tag, index) => (
-        <SelectTag name={tag.name} key={index} namecode={tag.namecode} />
+        <SelectTag tag={tag.tag} key={index} />
       ))}
     </View>
   );

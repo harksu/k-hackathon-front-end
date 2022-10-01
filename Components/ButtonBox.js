@@ -1,21 +1,38 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useResetRecoilState } from "recoil";
-import { selectedTag } from "../Atoms/atoms";
+import { useResetRecoilState, useRecoilValue } from "recoil";
+import { selectedTag, sendSignUpData } from "../Atoms/atoms";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const ButtonBox = ({ buttonInfoObject }) => {
   const navigation = useNavigation();
   const { leftTitle, rightTitle, leftDest, rightDest } = buttonInfoObject;
   //재사용을 위한 props 설정
-
+  const userInfo = useRecoilValue(sendSignUpData);
   return (
     <View style={styles.container}>
       <View style={styles.Buttonbox}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate(leftDest);
+            if (leftTitle === "회원가입") {
+              console.log(userInfo);
+              axios({
+                method: "post",
+                url: `http://3.36.109.37:8080/api/sign-up`,
+                headers: { "Access-Control-Allow-Origin": "*" },
+                //지금 이거 CORS 테스트중이고, 현재 데이터 보내려면 무조건 ENTER로 넘겨야됨
+                data: {
+                  ...userInfo,
+                },
+              })
+                .then((response) => {
+                  console.log(response.success);
+                  navigation.navigate(leftDest);
+                })
+                .catch((err) => console.log(err));
+            }
           }}
         >
           <Text style={styles.text}>{leftTitle}</Text>

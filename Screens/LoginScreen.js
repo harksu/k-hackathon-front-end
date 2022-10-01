@@ -6,13 +6,32 @@ import {
   TextInput,
   Keyboard,
 } from "react-native";
+import axios from "axios";
 import React, { useRef, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { useNavigation } from "@react-navigation/native";
+import { Cookies } from "react-cookie";
+import { AuthToken } from "../Atoms/atoms";
+const cookies = new Cookies();
 
+export const setCookie = (name, value, option) => {
+  return cookies.set(name, value, { ...option });
+};
+
+export const getCookie = (name) => cookies.get(name);
+
+export const removeCookie = (name) => cookies.remove(name);
 const LoginScreen = () => {
   const [id, setID] = useState("");
   const [pw, setPw] = useState("");
 
   const pwInput = useRef();
+
+  const setToken = useSetRecoilState(AuthToken);
+  const navigation = useNavigation();
+  const goMain = () => {
+    navigation.push("메인페이지"); //메인페이지로 넘기는데 props가 필요할까?
+  };
 
   return (
     <View style={styles.container}>
@@ -47,6 +66,18 @@ const LoginScreen = () => {
         style={styles.loginBox}
         onPress={() => {
           console.log("로그인 눌렸습니다");
+          axios
+            .post("http://mju-hackathon.p-e.kr:8080/api/sign-in", {
+              username: id,
+              password: pw,
+            })
+            .then((response) => {
+              //console.log(response.data.result.data.accessToken);
+              setToken(response.data.result.data.accessToken); //토큰 셋팅하고
+              setCookie(response.data.result.data.accessToken);
+              goMain();
+            })
+            .catch((error) => console.log(error));
         }}
       >
         <Text style={styles.logintext}>로그인</Text>
@@ -58,6 +89,7 @@ const LoginScreen = () => {
         <TouchableOpacity
           onPress={() => {
             console.log("회원가입 하러가기 눌렸습니다");
+            navigation.navigate("회원가입");
           }}
         >
           <Text style={{ fontWeight: "bold", color: "orange" }}>

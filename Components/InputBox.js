@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Keyboard } from "react-native";
 import React, { useState, useRef } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { sendSignUpData } from "../Atoms/atoms";
+import { sendSignUpData, selectedTag } from "../Atoms/atoms";
 
 const InputBox = () => {
   const nameInputRef = useRef();
@@ -18,6 +18,7 @@ const InputBox = () => {
   const [focusInput, setFocusInput] = useState(nameInputRef);
 
   const setData = useSetRecoilState(sendSignUpData);
+  const selected = useRecoilValue(selectedTag);
   const test = useRecoilValue(sendSignUpData);
   return (
     <View style={styles.container}>
@@ -77,7 +78,9 @@ const InputBox = () => {
           }}
         />
       </View>
-      <View style={[styles.box, focusInput === pwInputRef && styles.focusbox]}>
+      <View
+        style={[styles.box, focusInput === emailInputRef && styles.focusbox]}
+      >
         <TextInput
           placeholder="E-mail을 입력해주세요"
           value={email}
@@ -94,7 +97,9 @@ const InputBox = () => {
           }}
         />
       </View>
-      <View style={[styles.box, focusInput === pwInputRef && styles.focusbox]}>
+      <View
+        style={[styles.box, focusInput === phoneInputRef && styles.focusbox]}
+      >
         <TextInput
           placeholder="전화번호를 입력해주세요"
           value={phoneNumber}
@@ -113,6 +118,7 @@ const InputBox = () => {
               name: name,
               email: email,
               phone: phoneNumber,
+              tags: selected,
             });
           }}
         />
