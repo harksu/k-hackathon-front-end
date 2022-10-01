@@ -9,7 +9,7 @@ const TagList = () => {
   return (
     <View style={styles.container}>
       {TagData?.map((tag) => (
-        <Tag name={tag.value} key={tag.namecode} namecode={tag.namecode} />
+        <Tag name={tag.value} key={tag.value} />
       ))}
     </View>
   );

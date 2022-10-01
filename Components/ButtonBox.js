@@ -17,7 +17,7 @@ const ButtonBox = ({ buttonInfoObject }) => {
           style={styles.button}
           onPress={() => {
             if (leftTitle === "회원가입") {
-              //console.log(tempdata);
+              console.log(userInfo);
               axios({
                 method: "post",
                 url: `http://3.36.109.37:8080/api/sign-up`,
@@ -26,10 +26,12 @@ const ButtonBox = ({ buttonInfoObject }) => {
                 data: {
                   ...userInfo,
                 },
-              }).then((response) => {
-                console.log(response.success);
-                navigation.navigate(leftDest);
-              });
+              })
+                .then((response) => {
+                  console.log(response.success);
+                  navigation.navigate(leftDest);
+                })
+                .catch((err) => console.log(err));
             }
           }}
         >

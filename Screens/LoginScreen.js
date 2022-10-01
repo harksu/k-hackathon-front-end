@@ -9,8 +9,18 @@ import {
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import { useNavigation } from "@react-navigation/native";
+import { Cookies } from "react-cookie";
 import { AuthToken } from "../Atoms/atoms";
+const cookies = new Cookies();
 
+export const setCookie = (name, value, option) => {
+  return cookies.set(name, value, { ...option });
+};
+
+export const getCookie = (name) => cookies.get(name);
+
+export const removeCookie = (name) => cookies.remove(name);
 const LoginScreen = () => {
   const [id, setID] = useState("");
   const [pw, setPw] = useState("");
@@ -19,6 +29,9 @@ const LoginScreen = () => {
 
   const setToken = useSetRecoilState(AuthToken);
   const navigation = useNavigation();
+  const goMain = () => {
+    navigation.push("메인페이지"); //메인페이지로 넘기는데 props가 필요할까?
+  };
 
   return (
     <View style={styles.container}>
@@ -59,8 +72,10 @@ const LoginScreen = () => {
               password: pw,
             })
             .then((response) => {
-              console.log(response.data.result.data.accessToken);
-              setToken(response.data.result.data.accessToken);
+              //console.log(response.data.result.data.accessToken);
+              setToken(response.data.result.data.accessToken); //토큰 셋팅하고
+              setCookie(response.data.result.data.accessToken);
+              goMain();
             })
             .catch((error) => console.log(error));
         }}
