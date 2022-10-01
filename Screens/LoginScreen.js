@@ -74,7 +74,9 @@ const LoginScreen = () => {
             .then((response) => {
               //console.log(response.data.result.data.accessToken);
               setToken(response.data.result.data.accessToken); //토큰 셋팅하고
-              setCookie(response.data.result.data.accessToken);
+              setCookie("authToken", response.data.result.data.accessToken, {
+                path: "/",
+              });
               goMain();
             })
             .catch((error) => console.log(error));
