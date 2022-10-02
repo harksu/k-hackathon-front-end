@@ -5,29 +5,8 @@ import SelectedBox from "../Components/SelectedBox";
 import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { sendSignUpData, selectedTag } from "../Atoms/atoms";
-import instance from "./../Lib/Request";
-import { getCookie } from "../Screens/LoginScreen";
 
 const MainPage = () => {
-  const test = useRecoilValue(sendSignUpData);
-  const setTags = useSetRecoilState(selectedTag);
-
-  useEffect(() => {
-    {
-      //만약 로그인했을 때 선택 태그 없으면 받아옴
-      console.log(getCookie("authToken"));
-      instance
-        .get("api/tags")
-        .then((res) => {
-          console.log(res);
-          setTags(res.data.result.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
-  console.log(test);
   return (
     <View style={styles.container}>
       <SelectedBox />

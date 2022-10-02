@@ -26,8 +26,8 @@ const GuideSignUpScreen = () => {
   const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
 
   const buttonInfoObject = {
-    leftTitle: "온라인매칭",
-    rightTitle: "오프라인매칭",
+    leftTitle: "온라인등록",
+    rightTitle: "오프라인등록",
     leftDest: "가이드리스트",
     rightDest: "가이드리스트",
   };
@@ -123,7 +123,7 @@ const GuideSignUpScreen = () => {
       style={{ backgroundColor: "pink" }}
     >
       <View style={styles.container}>
-        <Title title={"홍길동님"} position={"(관광객)"} />
+        <Title title={"홍길동님"} position={"(가이드)"} />
         <PlaceImage />
         <SelectedBox />
         <TouchableOpacity
@@ -135,21 +135,14 @@ const GuideSignUpScreen = () => {
         >
           <MatchLocationBox
             locationInput={
-              stateValue ? cityValue.concat(stateValue) : "지역을 입력해주세요"
+              stateValue
+                ? cityValue.concat(stateValue)
+                : "가이드 장소를 입력해주세요"
             }
           />
         </TouchableOpacity>
-        <View style={styles.dateContainer}>
-          <MatchPeriodBox />
-        </View>
-        <View style={styles.textBox}>
-          <Text style={styles.text}>
-            {` 혼자서 어디를 가실지, 식사는 어떤 것을 골라야 할지 고민이 많으셨나요?
-  
-   이제는 혼자서 고민하지 많으시고 저희에게 맡겨주세요!
-  `}
-          </Text>
-        </View>
+        <View style={styles.dateContainer}></View>
+
         <ButtonBox buttonInfoObject={buttonInfoObject} />
         <UnderBar />
       </View>
@@ -172,16 +165,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dateContainer: {
-    flex: 1.5,
+    flex: 2.2,
     marginTop: 10,
-  },
-  textBox: {
-    flex: 0.7,
-    width: "80%",
-    // backgroundColor: "pink",
-    marginLeft: "auto",
-    marginRight: "auto",
-    justifyContent: "center",
+    backgroundColor: "pink",
   },
   text: { textAlign: "left", fontSize: 10 },
   choiceText: {
