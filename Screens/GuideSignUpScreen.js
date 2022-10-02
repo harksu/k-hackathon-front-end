@@ -5,6 +5,7 @@ import {
   DrawerLayoutAndroid,
   Button,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import SearchableDropdown from "react-native-searchable-dropdown";
@@ -12,7 +13,6 @@ import Title from "../Components/Title";
 import PlaceImage from "../Components/PlaceImage";
 import SelectedBox from "../Components/SelectedBox";
 import MatchLocationBox from "../Components/MatchLocationBox";
-import MatchPeriodBox from "../Components/MatchPeriodBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
@@ -24,6 +24,11 @@ const GuideSignUpScreen = () => {
   const [stateValue, setStateValue] = useState(""); // 두번째 선택
   const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함
   const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
+
+  const [basicPirce, setBasicPrice] = useState(0);
+  const [premiumPirce, setPremiumPircePrice] = useState(0);
+  const [introuduce, setIntroduce] = useState(""); // 그냥 이번 플젝은 코드 다 state로 쪼개서 하자..
+  const [isOffline, setIsOffline] = useState(false); //오프라인 설정은 일단 디폴트가 false,
 
   const buttonInfoObject = {
     leftTitle: "온라인등록",
@@ -114,6 +119,14 @@ const GuideSignUpScreen = () => {
       />
     </View>
   );
+
+  const PriceChoice = ({ name, price }) => (
+    <View style={styles.priceInputContainer}>
+      <Text>{name}</Text>
+      <TextInput placeholder={price} />
+    </View>
+  );
+
   return (
     <DrawerLayoutAndroid
       ref={drawer}
@@ -141,7 +154,13 @@ const GuideSignUpScreen = () => {
             }
           />
         </TouchableOpacity>
-        <View style={styles.dateContainer}></View>
+        <View style={styles.priceContainer}>
+          <PriceChoice name="베이직" price="500원" />
+          <PriceChoice name="프리미엄" price="1000원" />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput placeholder="자기소개를 입력해주세요!" />
+        </View>
 
         <ButtonBox buttonInfoObject={buttonInfoObject} />
         <UnderBar />
@@ -164,10 +183,29 @@ const styles = StyleSheet.create({
     //backgroundColor: "yellow",
     justifyContent: "center",
   },
-  dateContainer: {
-    flex: 2.2,
+  priceContainer: {
+    flex: 0.5,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    //backgroundColor: "pink",
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  priceInputContainer: {
+    justifyContent: "center",
+  },
+  inputContainer: {
+    flex: 1.5,
     marginTop: 10,
-    backgroundColor: "pink",
+    width: "80%",
+    alignItems: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    borderWidth: 2,
+    borderColor: "rgba(230, 230, 230, .5)",
+    borderRadius: 20,
+    //backgroundColor: "pink",
   },
   text: { textAlign: "left", fontSize: 10 },
   choiceText: {
