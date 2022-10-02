@@ -1,6 +1,6 @@
 //가이드 리스트 페이지
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -13,6 +13,8 @@ import { ListData } from "../Data/GuideListData";
 import GuideImg from "../assets/Guide.png";
 import OrangeBtn from "./OrangeBtn";
 import Pagenation from "./Pagenation";
+import axios from "axios";
+
 const ITEM_LIMIT = 4;
 const ITEM_WIDTH = (Dimensions.get("window").width * 45) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 30) / 100;
@@ -39,7 +41,20 @@ export const Item = (
 
 const GuideList = () => {
   const [page, setPage] = useState(1);
+  const [guideList, setGuideList] = useState([]);
   const index = (page - 1) * ITEM_LIMIT;
+  const getGuideList = () => {
+    try {
+      axios("/api/guides/all").then((res) => {
+        console.log(res);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getGuideList();
+  }, []);
   return (
     <View style={styles.container}>
       {/* 여러 리스트를 한번에 쉽게 띄울 수 있는 태그 공식문서 FlatList 참고 */}
