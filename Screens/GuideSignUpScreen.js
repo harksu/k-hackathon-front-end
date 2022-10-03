@@ -4,6 +4,7 @@ import {
   View,
   DrawerLayoutAndroid,
   Button,
+  Keyboard,
   TouchableOpacity,
   TextInput,
 } from "react-native";
@@ -16,6 +17,8 @@ import MatchLocationBox from "../Components/MatchLocationBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
+import axios from "axios";
+import instance from "./../Lib/Request";
 
 const GuideSignUpScreen = () => {
   const drawer = useRef(null);
@@ -26,9 +29,9 @@ const GuideSignUpScreen = () => {
   const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
 
   const [basicPirce, setBasicPrice] = useState(0);
-  const [premiumPirce, setPremiumPircePrice] = useState(0);
+  const [premiumPirce, setPremiumPirce] = useState(0);
   const [introuduce, setIntroduce] = useState(""); // 그냥 이번 플젝은 코드 다 state로 쪼개서 하자..
-  const [isOffline, setIsOffline] = useState(false); //오프라인 설정은 일단 디폴트가 false,
+  const [isOffline, setIsOffline] = useState(false); //오프라인 설정은 일단 디폴트가 false, 이건 필요없을듯
 
   const buttonInfoObject = {
     leftTitle: "온라인등록",
@@ -120,10 +123,60 @@ const GuideSignUpScreen = () => {
     </View>
   );
 
-  const PriceChoice = ({ name, price }) => (
+  const PriceChoice = ({ name, price, event, value }) => (
     <View style={styles.priceInputContainer}>
       <Text>{name}</Text>
-      <TextInput placeholder={price} />
+      <TextInput
+        placeholder={price}
+        value={value}
+        onChangeText={event}
+        textAlign={"center"}
+        //blurOnSubmit={false}
+      />
+    </View>
+  );
+
+  const GuideSignUpButton = () => (
+    <View style={styles.buttonContainer}>
+      <View style={styles.Buttonbox}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            instance
+              .post("http://mju-hackathon.p-e.kr:8080/api/guides", {
+                introduce: introuduce,
+                isOnlineGuiding: true,
+                offlinePrice: basicPirce,
+                onlinePrice: premiumPirce,
+                place: {
+                  city: cityValue,
+                  gu: stateValue,
+                },
+              })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((err) => console.log(err));
+          }}
+        >
+          <Text style={styles.buttontext}>온라인등록</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            instance
+              .get(`http://mju-hackathon.p-e.kr:8080/api/guides/all`)
+              .then((response) => {
+                console.log("가이드등록 잘 넘어가나?");
+                console.log(response.data.result.data);
+                //navigation.navigate(leftDest);
+              })
+              .catch((err) => console.log(err));
+          }} // 일단 테스트
+        >
+          <Text style={styles.buttontext}>오프라인등록</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
@@ -155,14 +208,33 @@ const GuideSignUpScreen = () => {
           />
         </TouchableOpacity>
         <View style={styles.priceContainer}>
-          <PriceChoice name="베이직" price="500원" />
-          <PriceChoice name="프리미엄" price="1000원" />
+          <PriceChoice
+            name="베이직"
+            price="500원"
+            value={basicPirce}
+            event={setBasicPrice}
+          />
+          <PriceChoice
+            name="프리미엄"
+            price="1000원"
+            value={premiumPirce}
+            event={setPremiumPirce}
+          />
         </View>
         <View style={styles.inputContainer}>
-          <TextInput placeholder="자기소개를 입력해주세요!" />
+          <TextInput
+            placeholder="자기소개를 입력해주세요!"
+            value={introuduce}
+            onChangeText={setIntroduce}
+            textAlign={"center"}
+            blurOnSubmit={false}
+            onSubmitEditing={() => {
+              Keyboard.dismiss();
+            }}
+          />
         </View>
-
-        <ButtonBox buttonInfoObject={buttonInfoObject} />
+        <GuideSignUpButton />
+        {/* <ButtonBox buttonInfoObject={buttonInfoObject} /> */}
         <UnderBar />
       </View>
     </DrawerLayoutAndroid>
@@ -216,6 +288,32 @@ const styles = StyleSheet.create({
     color: "blue",
     textAlign: "center",
     fontSize: 15,
+    fontWeight: "bold",
+  },
+  buttonContainer: {
+    flex: 0.5,
+    width: "80%",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  Buttonbox: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  button: {
+    width: "40%",
+    height: "66%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "orange",
+    backgroundColor: "white",
+    padding: 5,
+  },
+  buttontext: {
     fontWeight: "bold",
   },
 });

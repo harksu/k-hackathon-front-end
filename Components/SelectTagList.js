@@ -18,13 +18,16 @@ const SelectTagList = () => {
   }, [selected]);
   return (
     <View style={styles.container}>
-      {justLogin //서버 res랑 req랑 다름
+      {/* {justLogin //서버 res랑 req랑 다름
         ? selected?.map((tag, index) => (
-            <SelectTag tag={tag.name} key={index} />
+            <SelectTag tag={tag.name || tag.tag} key={index} />
           ))
         : selected?.map((tag, index) => (
             <SelectTag tag={tag.tag} key={index} />
-          ))}
+          ))} */}
+      {selected?.map((tag, index) => (
+        <SelectTag tag={tag.name || tag.tag} key={index} /> //이거 바꿔달라고 해야될듯
+      ))}
     </View>
   );
 };

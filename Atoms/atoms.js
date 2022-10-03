@@ -18,5 +18,5 @@ export const AuthToken = atom({
 
 export const isHost = atom({
   key: "host",
-  default: true,
+  default: false,
 });
