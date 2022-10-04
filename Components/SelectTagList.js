@@ -26,7 +26,7 @@ const SelectTagList = () => {
             <SelectTag tag={tag.tag} key={index} />
           ))} */}
       {selected?.map((tag, index) => (
-        <SelectTag tag={tag.name || tag.tag} key={index} /> //이거 바꿔달라고 해야될듯
+        <SelectTag tag={tag.name} key={index} /> //이거 바꿔달라고 해야될듯
       ))}
     </View>
   );

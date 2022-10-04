@@ -135,6 +135,7 @@ const GuideSignUpScreen = () => {
       />
     </View>
   );
+  //위 컴포넌트를 사용하면 리렌더링때문에 입력할 때 화병남
 
   const GuideSignUpButton = () => (
     <View style={styles.buttonContainer}>
@@ -143,7 +144,7 @@ const GuideSignUpScreen = () => {
           style={styles.button}
           onPress={() => {
             instance
-              .post("http://mju-hackathon.p-e.kr:8080/api/guides", {
+              .post("api/guides", {
                 introduce: introuduce,
                 isOnlineGuiding: true,
                 offlinePrice: basicPirce,
@@ -165,14 +166,21 @@ const GuideSignUpScreen = () => {
           style={styles.button}
           onPress={() => {
             instance
-              .get(`http://mju-hackathon.p-e.kr:8080/api/guides/all`)
+              .post("api/guides", {
+                introduce: introuduce,
+                isOnlineGuiding: false,
+                offlinePrice: basicPirce,
+                onlinePrice: premiumPirce,
+                place: {
+                  city: cityValue,
+                  gu: stateValue,
+                },
+              })
               .then((response) => {
-                console.log("가이드등록 잘 넘어가나?");
-                console.log(response.data.result.data);
-                //navigation.navigate(leftDest);
+                console.log(response);
               })
               .catch((err) => console.log(err));
-          }} // 일단 테스트
+          }}
         >
           <Text style={styles.buttontext}>오프라인등록</Text>
         </TouchableOpacity>
@@ -208,18 +216,24 @@ const GuideSignUpScreen = () => {
           />
         </TouchableOpacity>
         <View style={styles.priceContainer}>
-          <PriceChoice
-            name="베이직"
-            price="500원"
-            value={basicPirce}
-            event={setBasicPrice}
-          />
-          <PriceChoice
-            name="프리미엄"
-            price="1000원"
-            value={premiumPirce}
-            event={setPremiumPirce}
-          />
+          <View style={styles.priceInputContainer}>
+            <Text>베이직</Text>
+            <TextInput
+              placeholder="500원"
+              value={basicPirce}
+              onChangeText={setBasicPrice}
+              textAlign={"center"}
+            />
+          </View>
+          <View style={styles.priceInputContainer}>
+            <Text>프리미엄</Text>
+            <TextInput
+              placeholder="1000원"
+              value={premiumPirce}
+              onChangeText={setPremiumPirce}
+              textAlign={"center"}
+            />
+          </View>
         </View>
         <View style={styles.inputContainer}>
           <TextInput
