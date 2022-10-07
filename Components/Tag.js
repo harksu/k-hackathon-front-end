@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { selectedTag } from "../Atoms/atoms";
 
-const Tag = ({ name, namecode }) => {
+const Tag = ({ name }) => {
   const [isClicked, setIsClicked] = useState(false);
   const selected = useRecoilValue(selectedTag);
   const setSelected = useSetRecoilState(selectedTag);
@@ -12,14 +12,12 @@ const Tag = ({ name, namecode }) => {
     if (count < 4) {
       //선택 리스트 셋
       setIsClicked(!isClicked);
-      setSelected(selected.concat({ name: name, namecode: namecode })); //리넥은 e.target.value가 안쳐먹는다
+      setSelected(selected.concat({ tag: name })); //리넥은 e.target.value가 안쳐먹는다
     }
     if (count >= 0 && isClicked) {
       //선택 리스트 취소 셋
       setIsClicked(!isClicked);
-      const newSelectedList = selected.filter(
-        (tag) => tag.namecode !== namecode
-      );
+      const newSelectedList = selected.filter((tag) => tag.tag !== name);
       setSelected(newSelectedList);
     }
   };

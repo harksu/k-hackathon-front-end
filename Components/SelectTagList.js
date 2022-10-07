@@ -1,15 +1,23 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useRecoilValue } from "recoil";
-import React from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect } from "react";
 import SelectTag from "./SelectTag";
-import { selectedTag } from "../Atoms/atoms";
+import { selectedTag, sendSignUpData } from "../Atoms/atoms";
 
 const SelectTagList = () => {
   const selected = useRecoilValue(selectedTag);
+  const data = useRecoilValue(sendSignUpData);
+  const setData = useSetRecoilState(sendSignUpData);
+  useEffect(() => {
+    setData({
+      ...data,
+      tags: selected,
+    });
+  }, [selected]);
   return (
     <View style={styles.container}>
       {selected?.map((tag, index) => (
-        <SelectTag name={tag.name} key={index} namecode={tag.namecode} />
+        <SelectTag tag={tag.tag} key={index} />
       ))}
     </View>
   );

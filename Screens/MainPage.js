@@ -5,8 +5,12 @@ import SelectedBox from "../Components/SelectedBox";
 import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
+import { useRecoilValue } from "recoil";
+import { sendSignUpData } from "../Atoms/atoms";
 
 const MainPage = () => {
+  const test = useRecoilValue(sendSignUpData);
+  console.log(test);
   return (
     <View style={styles.container}>
       {/* <Title style={styles.title} title={"어디까지 가봤니?"} /> 이거 나중에 어떻게 할지 정해야됨*/}

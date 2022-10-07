@@ -1,20 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Level = () => {
+const Level = ({ onlinePrice, offlinePrice }) => {
   return (
     <View style={styles.container}>
       <View style={styles.textBox}>
-        <Text style={styles.course}>베이직</Text>
-        <Text style={styles.price}>5400원 </Text>
-      </View>
-      <View style={styles.textBox}>
-        <Text style={styles.course}>프리미엄</Text>
-        <Text style={styles.price}>5400원 </Text>
+        <Text style={styles.course}>온라인</Text>
+        <Text style={styles.price}>{onlinePrice}원 </Text>
       </View>
       <View style={styles.textBox}>
         <Text style={styles.course}>오프라인</Text>
-        <Text style={styles.price}>5400원 </Text>
+        <Text style={styles.price}>{offlinePrice}원 </Text>
       </View>
     </View>
   );
