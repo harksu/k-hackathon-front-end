@@ -22,7 +22,7 @@ const ButtonBox = ({ buttonInfoObject }) => {
               console.log(userInfo);
               axios({
                 method: "post",
-                url: `http://3.36.109.37:8080/api/sign-up`,
+                url: `/api/sign-up`,
                 headers: { "Access-Control-Allow-Origin": "*" },
                 //지금 이거 CORS 테스트중이고, 현재 데이터 보내려면 무조건 ENTER로 넘겨야됨
                 data: {

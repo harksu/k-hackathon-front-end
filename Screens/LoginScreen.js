@@ -71,11 +71,12 @@ const LoginScreen = () => {
         onPress={() => {
           console.log("로그인 눌렸습니다");
           axios
-            .post("http://mju-hackathon.p-e.kr:8080/api/sign-in", {
+            .post("/api/sign-in", {
               username: id,
               password: pw,
             })
             .then((response) => {
+              const token = response.data.result.data.accessToken;
               //console.log(response.data.result.data.accessToken);
 
               setToken(response.data.result.data.accessToken); //토큰 셋팅하고
@@ -85,7 +86,7 @@ const LoginScreen = () => {
               console.log("쿠키설정완료");
               if (getCookie("authToken")) {
                 axios
-                  .get("http://mju-hackathon.p-e.kr:8080/api/tags", {
+                  .get("/api/tags", {
                     //헤더 설정 싱크 갑자기 이상해서 일단 여기에다가
                     headers: {
                       Authorization: `Bearer ${getCookie("authToken")}`,

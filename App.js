@@ -10,14 +10,16 @@ import GuideListPage from "./Screens/GuideListPage";
 import DetailPage from "./Screens/DetailPage";
 import MatchScreen from "./Screens/MatchScreen";
 import GuideSignUpScreen from "./Screens/GuideSignUpScreen";
+import axios from "axios";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  axios.defaults.baseURL = "http://3.36.109.37:8080";
   return (
     <RecoilRoot>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SignUpScreen">
+        <Stack.Navigator initialRouteName="로그인페이지">
           <Stack.Screen name="로그인페이지" component={LoginScreen} />
           <Stack.Screen name="회원가입" component={SignUp} />
 
