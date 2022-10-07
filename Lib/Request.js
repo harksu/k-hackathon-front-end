@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCookie } from "../Pages/LoginPage";
+import { getCookie } from "../Screens/LoginScreen";
 
 const instance = axios.create({
   baseURL: "http://mju-hackathon.p-e.kr:8080/",

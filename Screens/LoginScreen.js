@@ -8,10 +8,11 @@ import {
 } from "react-native";
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { useNavigation } from "@react-navigation/native";
 import { Cookies } from "react-cookie";
-import { AuthToken } from "../Atoms/atoms";
+import { AuthToken, selectedTag } from "../Atoms/atoms";
+
 const cookies = new Cookies();
 
 export const setCookie = (name, value, option) => {
@@ -21,6 +22,7 @@ export const setCookie = (name, value, option) => {
 export const getCookie = (name) => cookies.get(name);
 
 export const removeCookie = (name) => cookies.remove(name);
+
 const LoginScreen = () => {
   const [id, setID] = useState("");
   const [pw, setPw] = useState("");
@@ -28,6 +30,8 @@ const LoginScreen = () => {
   const pwInput = useRef();
 
   const setToken = useSetRecoilState(AuthToken);
+  const tags = useRecoilValue(selectedTag);
+  const setTags = useSetRecoilState(selectedTag);
   const navigation = useNavigation();
   const goMain = () => {
     navigation.push("메인페이지"); //메인페이지로 넘기는데 props가 필요할까?
@@ -74,12 +78,29 @@ const LoginScreen = () => {
             .then((response) => {
               const token = response.data.result.data.accessToken;
               //console.log(response.data.result.data.accessToken);
-              setToken(token); //토큰 셋팅하고
-              setCookie(token);
-              axios.defaults.headers.common[
-                "Authorization"
-              ] = `Bearer ${token}`;
-              goMain();
+
+              setToken(response.data.result.data.accessToken); //토큰 셋팅하고
+              setCookie("authToken", response.data.result.data.accessToken, {
+                path: "/",
+              });
+              console.log("쿠키설정완료");
+              if (getCookie("authToken")) {
+                axios
+                  .get("/api/tags", {
+                    //헤더 설정 싱크 갑자기 이상해서 일단 여기에다가
+                    headers: {
+                      Authorization: `Bearer ${getCookie("authToken")}`,
+                    },
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    setTags(res.data.result.data);
+                    if (tags) {
+                      goMain();
+                    }
+                  })
+                  .catch((err) => console.log(`ㅠㅠ${err}`));
+              }
             })
             .catch((error) => console.log(error));
         }}

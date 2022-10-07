@@ -9,35 +9,11 @@ import { DetailData } from "../Data/GuideDetailData";
 const DetailPage = ({ route }) => {
   const name = route.params.name;
   const guideId = route.params.id;
-  const periodRef = useRef();
-  const dateRef = useRef();
-  const matchMethodRef = useRef();
-  const callNumberRef = useRef();
-  const emailRef = useRef();
-  const specialRequestRef = useRef();
   const [detailData, setDetailData] = useState(DetailData.result.data);
-  const [focusInput, setFocusInput] = useState(periodRef);
 
-  const [period, setPeriod] = useState("");
-  const [date, setDate] = useState("");
-  const [method, setMethod] = useState("");
-  const [callNumber, setCallNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [specialRequest, setSpecialRequest] = useState("");
   //spread쓰려다가 입력 순서 개판일 때 대비해서 그냥 상태 여러개로 늘렸습니다
   const [sendRequest, setSendRequest] = useState({});
 
-  const sendRequestInfomation = () => {
-    setSendRequest({
-      period: period,
-      date: date,
-      method: method,
-      callNumber: callNumber,
-      email: email,
-      specialRequest: specialRequest,
-    });
-    Keyboard.dismiss();
-  };
   return (
     <View style={styles.container}>
       <DetailInfo name={name} sendRequest={sendRequest} />

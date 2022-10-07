@@ -12,12 +12,12 @@ const Tag = ({ name }) => {
     if (count < 4) {
       //선택 리스트 셋
       setIsClicked(!isClicked);
-      setSelected(selected.concat({ tag: name })); //리넥은 e.target.value가 안쳐먹는다
+      setSelected(selected.concat({ name: name })); //리넥은 e.target.value가 안쳐먹는다
     }
     if (count >= 0 && isClicked) {
       //선택 리스트 취소 셋
       setIsClicked(!isClicked);
-      const newSelectedList = selected.filter((tag) => tag.tag !== name);
+      const newSelectedList = selected.filter((tag) => tag.name !== name);
       setSelected(newSelectedList);
     }
   };

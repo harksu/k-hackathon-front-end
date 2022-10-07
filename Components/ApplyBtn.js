@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 //이거 나중에 매칭 신청하러 가기랑 가이드 등록하러 가기로 바꿔야됨(프랍스로 이름이랑, 네비게이션 좌표 받아야됨)
-const ApplyBtn = () => {
+const ApplyBtn = ({ name, destnation }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -10,10 +10,10 @@ const ApplyBtn = () => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate("매칭페이지");
+            navigation.navigate(destnation);
           }}
         >
-          <Text style={styles.btnTxt}>매칭 신청하러 가기</Text>
+          <Text style={styles.btnTxt}>{name}</Text>
         </TouchableOpacity>
       </View>
     </View>

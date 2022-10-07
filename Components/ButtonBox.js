@@ -10,6 +10,8 @@ const ButtonBox = ({ buttonInfoObject }) => {
   const { leftTitle, rightTitle, leftDest, rightDest } = buttonInfoObject;
   //재사용을 위한 props 설정
   const userInfo = useRecoilValue(sendSignUpData);
+  const resetInfo = useResetRecoilState(sendSignUpData);
+  const resetSelectTag = useResetRecoilState(selectedTag);
   return (
     <View style={styles.container}>
       <View style={styles.Buttonbox}>
@@ -40,7 +42,13 @@ const ButtonBox = ({ buttonInfoObject }) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate(rightDest);
+            //navigation.navigate(rightDest);
+            if (rightTitle === "취소하기") {
+              console.log("취소합니다");
+              resetInfo();
+              resetSelectTag();
+              navigation.goBack();
+            }
           }} // 일단 테스트
         >
           <Text style={styles.text}>{rightTitle}</Text>
