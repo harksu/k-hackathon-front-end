@@ -34,6 +34,8 @@ const ButtonBox = ({ buttonInfoObject }) => {
                   navigation.navigate(leftDest);
                 })
                 .catch((err) => console.log(err));
+            } else if (leftTitle === "온라인매칭") {
+              navigation.navigate(leftDest);
             }
           }}
         >

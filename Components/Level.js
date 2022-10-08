@@ -1,17 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Level = ({ onlinePrice, offlinePrice }) => {
+const Level = ({ onlinePrice, offlinePrice, isOnlyOnline }) => {
   return (
     <View style={styles.container}>
       <View style={styles.textBox}>
         <Text style={styles.course}>온라인</Text>
         <Text style={styles.price}>{onlinePrice}원 </Text>
       </View>
-      <View style={styles.textBox}>
-        <Text style={styles.course}>오프라인</Text>
-        <Text style={styles.price}>{offlinePrice}원 </Text>
-      </View>
+      {!isOnlyOnline && (
+        <View style={styles.textBox}>
+          <Text style={styles.course}>오프라인</Text>
+          <Text style={styles.price}>{offlinePrice}원 </Text>
+        </View>
+      )}
     </View>
   );
 };

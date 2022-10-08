@@ -6,7 +6,7 @@ const OrangeBtn = ({ text, name, guideId }) => {
   const navigation = useNavigation();
   const goDetail = () => {
     if (text === "자세히") {
-      navigation.push("디테일페이지", { name: name, id: guideId }); //여기서 props 같이 남겨야됨 ;
+      navigation.push("디테일페이지", { name: name, guideId: guideId }); //여기서 props 같이 남겨야됨 ;
       // console.log(name); // 이제 이걸로 북치고 장구치고 하면 될 듯
     }
   };
