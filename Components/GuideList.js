@@ -15,13 +15,14 @@ import OrangeBtn from "./OrangeBtn";
 import Pagenation from "./Pagenation";
 import axios from "axios";
 import { DetailData } from "../Data/GuideDetailData";
+import { getCookie } from "../Screens/LoginScreen";
 
 const ITEM_LIMIT = 4;
 const ITEM_WIDTH = (Dimensions.get("window").width * 45) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 30) / 100;
 
 export const Item = (
-  { name, discription, id } //FlatList에서 띄우고자 하는 item 컴포넌트 확인하시면 바로 분리할게요
+  { name, discription, guideId } //FlatList에서 띄우고자 하는 item 컴포넌트 확인하시면 바로 분리할게요
 ) => {
   const handleClick = () => {
     console.log("click");
@@ -39,7 +40,7 @@ export const Item = (
             text={"자세히"}
             style={styles.btnStyle}
             name={name}
-            guidId={id}
+            guideId={guideId}
           />
         </View>
         <View style={styles.btnContainer}>
@@ -57,15 +58,19 @@ const GuideList = () => {
   const index = (page - 1) * ITEM_LIMIT;
 
   useEffect(() => {
-    // try {
-    //   axios("/api/guides/all").then((res) => {
-    //     setGuideList(res.data.result.data);
-    //     setIsLoading(false);
-    //   });
-    // } catch (e) {
-    //   console.log(e);
-    // }
-    setGuideList(ListData);
+    try {
+      axios("/api/guides/all", {
+        headers: {
+          Authorization: `Bearer ${getCookie("authToken")}`,
+        },
+      }).then((res) => {
+        setGuideList(res.data.result.data);
+        setIsLoading(false);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    // setGuideList(ListData);
   }, []);
   return (
     <View style={styles.container}>
@@ -81,7 +86,7 @@ const GuideList = () => {
                 key={item.id}
                 name={item.name}
                 discription={item.introduce}
-                id={item.guideId}
+                guideId={item.guideId}
               />
             )}
             numColumns={2}

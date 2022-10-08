@@ -11,7 +11,7 @@ import GuideImg from "../assets/Guide.png";
 const ITEM_WIDTH = (Dimensions.get("window").width * 80) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 35) / 200;
 
-const DetailInfo = ({ name, sendRequest }) => {
+const DetailInfo = ({ name }) => {
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={GuideImg} />
@@ -19,10 +19,7 @@ const DetailInfo = ({ name, sendRequest }) => {
         <Text style={styles.titleText}>가이드</Text>
         <Text style={styles.nameText}>{name}</Text>
         <View style={styles.Buttonbox}>
-          <TouchableOpacity
-            style={styles.button}
-            onPressIn={console.log(sendRequest)}
-          >
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>신청하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
