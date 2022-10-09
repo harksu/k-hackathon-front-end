@@ -14,24 +14,37 @@ import { Cookies } from "react-cookie";
 import { AuthToken, selectedTag } from "../Atoms/atoms";
 
 const cookies = new Cookies();
-
 export const setCookie = (name, value, option) => {
   return cookies.set(name, value, { ...option });
 };
-
 export const getCookie = (name) => cookies.get(name);
-
 export const removeCookie = (name) => cookies.remove(name);
 
 const LoginScreen = () => {
   const [id, setID] = useState("");
   const [pw, setPw] = useState("");
-
+  const handleLogin = async () => {
+    try {
+      await axios
+        .post("/api/sign-in", {
+          username: id,
+          password: pw,
+        })
+        .then((response) => {
+          console.log(response.data.result.data.accessToken);
+          const accessToken = response.data.result.data.accessToken;
+          axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
+          setCookie("authToken", accessToken, {
+            path: "/",
+          });
+        })
+        .then(goMain());
+    } catch (e) {
+      console.log(e);
+      console.log("로그인 실패", e);
+    }
+  };
   const pwInput = useRef();
-
-  const setToken = useSetRecoilState(AuthToken);
-  const tags = useRecoilValue(selectedTag);
-  const setTags = useSetRecoilState(selectedTag);
   const navigation = useNavigation();
   const goMain = () => {
     navigation.push("메인페이지"); //메인페이지로 넘기는데 props가 필요할까?
@@ -42,7 +55,7 @@ const LoginScreen = () => {
       <Text style={styles.title}>어디까지 가봤니?</Text>
       <View style={styles.box}>
         <TextInput
-          placeholder="이름을 입력해주세요"
+          placeholder="ID를 입력해주세요"
           value={id}
           onChangeText={setID}
           textAlign={"center"}
@@ -54,7 +67,7 @@ const LoginScreen = () => {
       </View>
       <View style={styles.box}>
         <TextInput
-          placeholder="이름을 입력해주세요"
+          placeholder="비밀번호를 입력해주세요"
           value={pw}
           onChangeText={setPw}
           textAlign={"center"}
@@ -66,45 +79,7 @@ const LoginScreen = () => {
           }}
         />
       </View>
-      <TouchableOpacity
-        style={styles.loginBox}
-        onPress={() => {
-          console.log("로그인 눌렸습니다");
-          axios
-            .post("/api/sign-in", {
-              username: id,
-              password: pw,
-            })
-            .then((response) => {
-              const token = response.data.result.data.accessToken;
-              //console.log(response.data.result.data.accessToken);
-
-              setToken(response.data.result.data.accessToken); //토큰 셋팅하고
-              setCookie("authToken", response.data.result.data.accessToken, {
-                path: "/",
-              });
-              console.log("쿠키설정완료");
-              if (getCookie("authToken")) {
-                axios
-                  .get("/api/tags", {
-                    //헤더 설정 싱크 갑자기 이상해서 일단 여기에다가
-                    headers: {
-                      Authorization: `Bearer ${getCookie("authToken")}`,
-                    },
-                  })
-                  .then((res) => {
-                    console.log(res);
-                    setTags(res.data.result.data);
-                    if (tags) {
-                      goMain();
-                    }
-                  })
-                  .catch((err) => console.log(`ㅠㅠ${err}`));
-              }
-            })
-            .catch((error) => console.log(error));
-        }}
-      >
+      <TouchableOpacity style={styles.loginBox} onPress={handleLogin}>
         <Text style={styles.logintext}>로그인</Text>
       </TouchableOpacity>
       <View style={styles.textbox}>

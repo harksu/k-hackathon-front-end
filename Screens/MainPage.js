@@ -1,15 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../Components/Title";
 import { View, StyleSheet, Text } from "react-native";
 import SelectedBox from "../Components/SelectedBox";
 import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
+import instance from "../Lib/Request";
 
 const MainPage = () => {
+  const [myTag, setMyTag] = useState([]);
+  const getMyTag = async () => {
+    try {
+      await instance.get("/api/tags").then((res) => {
+        setMyTag((prev) => prev.concat(res.data.result.data));
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    getMyTag();
+  }, []);
   return (
     <View style={styles.container}>
-      <SelectedBox />
+      {myTag && <SelectedBox tagList={myTag} />}
       <Recommend />
       <View style={styles.btnContainer}>
         <ApplyBtn name="관광객 등록" destnation="매칭페이지" />

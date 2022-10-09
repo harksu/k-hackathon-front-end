@@ -4,7 +4,7 @@ import DetailInfo from "../Components/DetailInfo";
 import SelectTagList from "../Components/SelectTagList";
 import Level from "../Components/Level";
 import UnderBar from "../Components/UnderBar";
-import axios from "axios";
+import instance from "../Lib/Request";
 import { getCookie } from "./LoginScreen";
 
 const DetailPage = ({ route }) => {
@@ -15,7 +15,7 @@ const DetailPage = ({ route }) => {
   const [isOnlyOnline, setIsOnlyOnline] = useState(true);
   const getGuideData = async () => {
     try {
-      await axios
+      await instance
         .get(`/api/guides/${guideId}`, {
           headers: {
             Authorization: `Bearer ${getCookie("authToken")}`,
@@ -45,7 +45,7 @@ const DetailPage = ({ route }) => {
             <Text>선택된 태그</Text>
           </View>
           <View style={styles.TagListContainer}>
-            <SelectTagList />
+            <SelectTagList tagList={detailData.guideTags} />
           </View>
           <View style={styles.courseBox}>
             <Level

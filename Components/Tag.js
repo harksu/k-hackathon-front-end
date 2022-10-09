@@ -1,24 +1,33 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { selectedTag } from "../Atoms/atoms";
+import React, { useEffect, useState } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { selectedTag, sendSignUpData } from "../Atoms/atoms";
 
 const Tag = ({ name }) => {
   const [isClicked, setIsClicked] = useState(false);
-  const selected = useRecoilValue(selectedTag);
-  const setSelected = useSetRecoilState(selectedTag);
+  const [selected, setSelected] = useRecoilState(selectedTag);
+  const [data, setData] = useRecoilState(sendSignUpData);
   const count = selected.length;
+
+  useEffect(() => {
+    setData((prev) => {
+      return {
+        ...prev,
+        tags: selected,
+      };
+    });
+  }, [selected]);
+
   const Click = (e) => {
     if (count < 4) {
       //선택 리스트 셋
       setIsClicked(!isClicked);
-      setSelected(selected.concat({ name: name })); //리넥은 e.target.value가 안쳐먹는다
+      setSelected((prev) => prev.concat({ name })); //리넥은 e.target.value가 안쳐먹는다
     }
     if (count >= 0 && isClicked) {
       //선택 리스트 취소 셋
       setIsClicked(!isClicked);
-      const newSelectedList = selected.filter((tag) => tag.name !== name);
-      setSelected(newSelectedList);
+      setSelected((prev) => prev.filter((tag) => tag.name !== name));
     }
   };
   return (
