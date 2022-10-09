@@ -2,14 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import SelectTagList from "./SelectTagList";
 
-const SelectedBox = () => {
+const SelectedBox = ({ tagList }) => {
   return (
     <View style={styles.container}>
       <View style={styles.box}>
         <Text>선택된 테마 목록</Text>
       </View>
       <View style={styles.tagbox}>
-        <SelectTagList />
+        <SelectTagList tagList={tagList} />
       </View>
     </View>
   );

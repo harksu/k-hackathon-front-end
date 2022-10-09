@@ -6,8 +6,11 @@ import TagBox from "../Components/TagBox";
 import SelectedBox from "../Components/SelectedBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
+import { selectedTag } from "../Atoms/atoms";
+import { useRecoilValue } from "recoil";
 
 const SignUp = () => {
+  const selectedTagList = useRecoilValue(selectedTag);
   const buttonInfoObject = {
     leftTitle: "회원가입",
     rightTitle: "취소하기",
@@ -19,7 +22,7 @@ const SignUp = () => {
       {/* // <Title title="회원 가입" /> */}
       <InputBox />
       <TagBox />
-      <SelectedBox />
+      <SelectedBox tagList={selectedTagList} />
       <ButtonBox buttonInfoObject={buttonInfoObject} />
       <UnderBar />
     </View>

@@ -9,12 +9,10 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import { ListData } from "../Data/GuideListData";
 import GuideImg from "../assets/Guide.png";
 import OrangeBtn from "./OrangeBtn";
 import Pagenation from "./Pagenation";
-import axios from "axios";
-import { DetailData } from "../Data/GuideDetailData";
+import instance from "../Lib/Request";
 import { getCookie } from "../Screens/LoginScreen";
 
 const ITEM_LIMIT = 4;
@@ -59,7 +57,7 @@ const GuideList = () => {
 
   useEffect(() => {
     try {
-      axios("/api/guides/all", {
+      instance("/api/guides/all", {
         headers: {
           Authorization: `Bearer ${getCookie("authToken")}`,
         },

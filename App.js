@@ -15,7 +15,7 @@ import axios from "axios";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  axios.defaults.baseURL = "http://3.36.109.37:8080";
+  axios.defaults.baseURL = "http://mju-hackathon.p-e.kr:8080/";
   return (
     <RecoilRoot>
       <NavigationContainer>
