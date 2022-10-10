@@ -14,11 +14,12 @@ import OrangeBtn from "./OrangeBtn";
 import Pagenation from "./Pagenation";
 import instance from "../Lib/Request";
 import { getCookie } from "../Screens/LoginScreen";
+import { useRecoilValue } from "recoil";
+import { matchRequest } from "../Atoms/atoms";
 
 const ITEM_LIMIT = 4;
 const ITEM_WIDTH = (Dimensions.get("window").width * 45) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 30) / 100;
-
 export const Item = (
   { name, discription, guideId } //FlatList에서 띄우고자 하는 item 컴포넌트 확인하시면 바로 분리할게요
 ) => {
@@ -42,7 +43,7 @@ export const Item = (
           />
         </View>
         <View style={styles.btnContainer}>
-          <OrangeBtn onClick={handleClick} text={"신청"} />
+          <OrangeBtn event={handleClick} text={"신청"} />
         </View>
       </View>
     </View>
@@ -54,8 +55,10 @@ const GuideList = () => {
   const [guideList, setGuideList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const index = (page - 1) * ITEM_LIMIT;
+  const test = useRecoilValue(matchRequest);
 
   useEffect(() => {
+    console.log(test);
     try {
       instance("/api/guides/all", {
         headers: {

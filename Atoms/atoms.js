@@ -20,3 +20,13 @@ export const isHost = atom({
   key: "host",
   default: false,
 });
+
+export const matchRequest = atom({
+  key: "matchRequest",
+  default: {},
+});
+
+export const modal = atom({
+  key: "modal",
+  default: false,
+});

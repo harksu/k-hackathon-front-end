@@ -8,6 +8,7 @@ import ApplyBtn from "../Components/ApplyBtn";
 import instance from "../Lib/Request";
 import { useSetRecoilState } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
+import { getCookie } from "./LoginScreen";
 
 const MainPage = () => {
   const [myTag, setMyTag] = useState([]);
@@ -15,6 +16,7 @@ const MainPage = () => {
   const getMyTag = async () => {
     try {
       await instance.get("/api/tags").then((res) => {
+        console.log(res.data.result.data);
         setMyTag((prev) => prev.concat(res.data.result.data));
         setTag(res.data.result.data);
       });
@@ -23,7 +25,11 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    getMyTag();
+    setTimeout(() => {
+      getMyTag();
+    }, 500);
+
+    console.log(`${getCookie("authToken")}`);
   }, []);
   return (
     <View style={styles.container}>

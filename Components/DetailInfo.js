@@ -6,12 +6,28 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import GuideImg from "../assets/Guide.png";
+import instance from "../Lib/Request";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { matchRequest, modal } from "../Atoms/atoms";
 const ITEM_WIDTH = (Dimensions.get("window").width * 80) / 100;
 const ITEM_HEIGHT = (Dimensions.get("window").height * 35) / 200;
 
-const DetailInfo = ({ name }) => {
+const DetailInfo = ({ name, guideId }) => {
+  const match = useRecoilValue(matchRequest);
+  const ismodal = useRecoilValue(modal);
+  const setmodal = useSetRecoilState(modal);
+  const onpress = () => {
+    setmodal(!ismodal);
+    console.log(ismodal);
+    console.log({ ...match });
+    instance
+      .post(`/api/matches/${guideId}`, { ...match })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={GuideImg} />
@@ -19,7 +35,7 @@ const DetailInfo = ({ name }) => {
         <Text style={styles.titleText}>가이드</Text>
         <Text style={styles.nameText}>{name}</Text>
         <View style={styles.Buttonbox}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={onpress}>
             <Text style={styles.buttonText}>신청하기</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
@@ -27,6 +43,7 @@ const DetailInfo = ({ name }) => {
           </TouchableOpacity>
         </View>
       </View>
+
       {/* <View style={styles.textBox}></View> */}
     </View>
   );
@@ -54,6 +71,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomLeftRadius: 20,
   },
+  modalContainer: { flex: 2, height: "100%", backgroundColor: "pink" },
   infoBox: {
     flex: 1,
     // widht: "30%",
