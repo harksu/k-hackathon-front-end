@@ -19,6 +19,8 @@ import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
 import axios from "axios";
 import instance from "./../Lib/Request";
+import { useRecoilValue } from "recoil";
+import { selectedTag } from "./../Atoms/atoms";
 
 const GuideSignUpScreen = () => {
   const drawer = useRef(null);
@@ -40,6 +42,7 @@ const GuideSignUpScreen = () => {
     rightDest: "가이드리스트",
   };
 
+  const TagList = useRecoilValue(selectedTag);
   const conditionSelect = (itemlist, name) => {
     if (itemlist !== CITY) {
       console.log("이거 아니에요");
@@ -144,7 +147,7 @@ const GuideSignUpScreen = () => {
           style={styles.button}
           onPress={() => {
             instance
-              .post("api/guides", {
+              .post("/api/guides", {
                 introduce: introuduce,
                 isOnlineGuiding: true,
                 offlinePrice: basicPirce,
@@ -166,7 +169,7 @@ const GuideSignUpScreen = () => {
           style={styles.button}
           onPress={() => {
             instance
-              .post("api/guides", {
+              .post("/api/guides", {
                 introduce: introuduce,
                 isOnlineGuiding: false,
                 offlinePrice: basicPirce,
@@ -199,7 +202,7 @@ const GuideSignUpScreen = () => {
       <View style={styles.container}>
         <Title title={"홍길동님"} position={"(가이드)"} />
         <PlaceImage />
-        <SelectedBox />
+        <SelectedBox tagList={TagList} />
         <TouchableOpacity
           onPress={() => {
             drawer.current.openDrawer();

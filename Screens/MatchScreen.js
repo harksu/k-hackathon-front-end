@@ -16,10 +16,12 @@ import MatchPeriodBox from "../Components/MatchPeriodBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
+import { useRecoilValue } from "recoil";
+import { selectedTag } from "./../Atoms/atoms";
 
 const MatchScreen = () => {
   const drawer = useRef(null);
-
+  const TagList = useRecoilValue(selectedTag);
   const [cityValue, setCityValue] = useState(""); // 첫번째 선택
   const [stateValue, setStateValue] = useState(""); // 두번째 선택
   const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함
@@ -125,7 +127,7 @@ const MatchScreen = () => {
       <View style={styles.container}>
         <Title title={"홍길동님"} position={"(관광객)"} />
         <PlaceImage />
-        <SelectedBox />
+        <SelectedBox tagList={TagList} />
         <TouchableOpacity
           onPress={() => {
             drawer.current.openDrawer();

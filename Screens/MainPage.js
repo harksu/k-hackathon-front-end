@@ -6,13 +6,17 @@ import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
 import instance from "../Lib/Request";
+import { useSetRecoilState } from "recoil";
+import { selectedTag } from "./../Atoms/atoms";
 
 const MainPage = () => {
   const [myTag, setMyTag] = useState([]);
+  const setTag = useSetRecoilState(selectedTag);
   const getMyTag = async () => {
     try {
       await instance.get("/api/tags").then((res) => {
         setMyTag((prev) => prev.concat(res.data.result.data));
+        setTag(res.data.result.data);
       });
     } catch (e) {
       console.log(e);
