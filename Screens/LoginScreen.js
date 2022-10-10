@@ -31,14 +31,19 @@ const LoginScreen = () => {
           password: pw,
         })
         .then((response) => {
-          console.log(response.data.result.data.accessToken);
+          console.log(`나는 응답값${response.data.result.data.accessToken}`);
           const accessToken = response.data.result.data.accessToken;
           axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
           setCookie("authToken", accessToken, {
             path: "/",
           });
-        })
-        .then(goMain());
+          console.log(`나는 쿠키값${getCookie("authToken")}`);
+          if (getCookie("authToken") === accessToken) {
+            setTimeout(() => {
+              goMain();
+            }, 500);
+          }
+        });
     } catch (e) {
       console.log(e);
       console.log("로그인 실패", e);

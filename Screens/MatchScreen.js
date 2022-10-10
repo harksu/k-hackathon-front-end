@@ -16,8 +16,8 @@ import MatchPeriodBox from "../Components/MatchPeriodBox";
 import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
-import { useRecoilValue } from "recoil";
-import { selectedTag } from "./../Atoms/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { selectedTag, matchRequest } from "./../Atoms/atoms";
 
 const MatchScreen = () => {
   const drawer = useRef(null);
@@ -26,6 +26,7 @@ const MatchScreen = () => {
   const [stateValue, setStateValue] = useState(""); // 두번째 선택
   const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함
   const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
+  const setMatch = useSetRecoilState(matchRequest);
 
   const buttonInfoObject = {
     leftTitle: "온라인매칭",
@@ -111,6 +112,7 @@ const MatchScreen = () => {
       <Button
         title="선택 완료"
         onPress={() => {
+          // setMatch({ location: sendLocationData });
           drawer.current.closeDrawer();
         }}
       />
