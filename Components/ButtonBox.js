@@ -37,6 +37,7 @@ const ButtonBox = ({ buttonInfoObject }) => {
                 })
                 .catch((err) => console.log(err));
             } else if (leftTitle === "온라인매칭") {
+              console.log(test);
               setMatch({ ...test, isOnline: true });
               navigation.navigate(leftDest);
             }

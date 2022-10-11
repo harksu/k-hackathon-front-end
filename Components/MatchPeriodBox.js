@@ -68,7 +68,7 @@ const MatchPeriodBox = () => {
           setEndDate(date);
           setMatch({
             period: `${dateParse(startDate)} ~ ${dateParse(endDate)}`,
-          });
+          }); //이새끼 갑자기 왜 안쳐먹어
           console.log("gd");
           setEndDateVisible(false);
         }}
