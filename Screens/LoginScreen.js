@@ -37,8 +37,8 @@ const LoginScreen = () => {
           setCookie("authToken", accessToken, {
             path: "/",
           });
-        })
-        .then(goMain());
+          goMain();
+        });
     } catch (e) {
       console.log(e);
       console.log("로그인 실패", e);

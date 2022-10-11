@@ -8,15 +8,17 @@ import ApplyBtn from "../Components/ApplyBtn";
 import instance from "../Lib/Request";
 import { useSetRecoilState } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
+import axios from "axios";
 
 const MainPage = () => {
   const [myTag, setMyTag] = useState([]);
   const setTag = useSetRecoilState(selectedTag);
   const getMyTag = async () => {
     try {
-      await instance.get("/api/tags").then((res) => {
-        setMyTag((prev) => prev.concat(res.data.result.data));
+      await axios.get("/api/tags").then((res) => {
+        setMyTag(res.data.result.data);
         setTag(res.data.result.data);
+        console.log(res.data.result.data);
       });
     } catch (e) {
       console.log(e);
