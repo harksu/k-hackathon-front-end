@@ -25,7 +25,11 @@ const MainPage = () => {
     }
   };
   useEffect(() => {
-    getMyTag();
+    setTimeout(() => {
+      getMyTag();
+    }, 500);
+
+    console.log(`${getCookie("authToken")}`);
   }, []);
   return (
     <View style={styles.container}>

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useResetRecoilState, useRecoilValue } from "recoil";
-import { selectedTag, sendSignUpData } from "../Atoms/atoms";
+import { useResetRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { selectedTag, sendSignUpData, matchRequest } from "../Atoms/atoms";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
@@ -12,6 +12,8 @@ const ButtonBox = ({ buttonInfoObject }) => {
   const userInfo = useRecoilValue(sendSignUpData);
   const resetInfo = useResetRecoilState(sendSignUpData);
   const resetSelectTag = useResetRecoilState(selectedTag);
+  const setMatch = useSetRecoilState(matchRequest);
+  const test = useRecoilValue(matchRequest);
   return (
     <View style={styles.container}>
       <View style={styles.Buttonbox}>
@@ -35,6 +37,7 @@ const ButtonBox = ({ buttonInfoObject }) => {
                 })
                 .catch((err) => console.log(err));
             } else if (leftTitle === "온라인매칭") {
+              setMatch({ ...test, isOnline: true });
               navigation.navigate(leftDest);
             }
           }}
@@ -50,7 +53,8 @@ const ButtonBox = ({ buttonInfoObject }) => {
               resetInfo();
               resetSelectTag();
               navigation.goBack();
-            }
+            } else if (rightTitle === "오프라인매칭")
+              navigation.navigate(rightDest);
           }} // 일단 테스트
         >
           <Text style={styles.text}>{rightTitle}</Text>
