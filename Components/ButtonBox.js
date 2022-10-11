@@ -25,8 +25,8 @@ const ButtonBox = ({ buttonInfoObject }) => {
               axios({
                 method: "post",
                 url: `/api/sign-up`,
-                headers: { "Access-Control-Allow-Origin": "*" },
-                //지금 이거 CORS 테스트중이고, 현재 데이터 보내려면 무조건 ENTER로 넘겨야됨
+                // headers: { "Access-Control-Allow-Origin": "*" },
+                // //지금 이거 CORS 테스트중이고, 현재 데이터 보내려면 무조건 ENTER로 넘겨야됨
                 data: {
                   ...userInfo,
                 },

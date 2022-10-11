@@ -14,7 +14,7 @@ const SignUp = () => {
   const buttonInfoObject = {
     leftTitle: "회원가입",
     rightTitle: "취소하기",
-    leftDest: "메인페이지",
+    leftDest: "로그인페이지",
     rightDest: "가이드리스트",
   };
   return (

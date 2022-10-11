@@ -8,10 +8,8 @@ import {
 } from "react-native";
 import axios from "axios";
 import React, { useRef, useState } from "react";
-import { useSetRecoilState, useRecoilValue } from "recoil";
 import { useNavigation } from "@react-navigation/native";
 import { Cookies } from "react-cookie";
-import { AuthToken, selectedTag } from "../Atoms/atoms";
 
 const cookies = new Cookies();
 export const setCookie = (name, value, option) => {
@@ -31,18 +29,12 @@ const LoginScreen = () => {
           password: pw,
         })
         .then((response) => {
-          console.log(`나는 응답값${response.data.result.data.accessToken}`);
           const accessToken = response.data.result.data.accessToken;
           axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
           setCookie("authToken", accessToken, {
             path: "/",
           });
-          console.log(`나는 쿠키값${getCookie("authToken")}`);
-          if (getCookie("authToken") === accessToken) {
-            setTimeout(() => {
-              goMain();
-            }, 500);
-          }
+          goMain();
         });
     } catch (e) {
       console.log(e);
