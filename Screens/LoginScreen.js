@@ -30,7 +30,9 @@ const LoginScreen = () => {
         })
         .then((response) => {
           const accessToken = response.data.result.data.accessToken;
-          axios.defaults.headers.Authorization = `Bearer ${accessToken}`;
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${accessToken}`;
           setCookie("authToken", accessToken, {
             path: "/",
           });

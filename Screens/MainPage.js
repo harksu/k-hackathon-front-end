@@ -9,6 +9,7 @@ import instance from "../Lib/Request";
 import { useSetRecoilState } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
 import axios from "axios";
+import { getCookie } from "./LoginScreen";
 
 const MainPage = () => {
   const [myTag, setMyTag] = useState([]);
