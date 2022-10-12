@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { matchRequest } from "../Atoms/atoms";
 
 const MatchPeriodBox = () => {
@@ -12,6 +12,7 @@ const MatchPeriodBox = () => {
   const [endDateVisible, setEndDateVisible] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
   const setMatch = useSetRecoilState(matchRequest);
   const dateParse = (date) => {
     const year = date.getFullYear();
@@ -19,6 +20,7 @@ const MatchPeriodBox = () => {
     const day = date.getDate();
     return `${year}-${month}-${day}`;
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -65,10 +67,14 @@ const MatchPeriodBox = () => {
         isVisible={endDateVisible}
         mode="date"
         onConfirm={(date) => {
-          setEndDate(date);
-          setMatch({
-            period: `${dateParse(startDate)} ~ ${dateParse(endDate)}`,
+          setMatch((prev) => {
+            return {
+              ...prev,
+              period: `${dateParse(startDate)} ~ ${dateParse(date)}`,
+            };
           });
+          setEndDate(date);
+
           console.log("gd");
           setEndDateVisible(false);
         }}
