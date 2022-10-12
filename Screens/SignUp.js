@@ -8,6 +8,7 @@ import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { selectedTag } from "../Atoms/atoms";
 import { useRecoilValue } from "recoil";
+import Container from "toastify-react-native";
 
 const SignUp = () => {
   const selectedTagList = useRecoilValue(selectedTag);
@@ -19,6 +20,7 @@ const SignUp = () => {
   };
   return (
     <View style={styles.container}>
+      <Container duration={1000} />
       {/* // <Title title="회원 가입" /> */}
       <InputBox />
       <TagBox />

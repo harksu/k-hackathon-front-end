@@ -10,6 +10,7 @@ import { useSetRecoilState } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
 import axios from "axios";
 import { getCookie } from "./LoginScreen";
+import Container, { Toast } from "toastify-react-native";
 
 const MainPage = () => {
   const [myTag, setMyTag] = useState([]);
@@ -34,6 +35,7 @@ const MainPage = () => {
   }, []);
   return (
     <View style={styles.container}>
+      <Container duration={1000} />
       {myTag && <SelectedBox tagList={myTag} />}
       <Recommend />
       <View style={styles.btnContainer}>

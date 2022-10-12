@@ -4,6 +4,7 @@ import { useResetRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { selectedTag, sendSignUpData, matchRequest } from "../Atoms/atoms";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import Container, { Toast } from "toastify-react-native";
 
 const ButtonBox = ({ buttonInfoObject }) => {
   const navigation = useNavigation();
@@ -16,6 +17,7 @@ const ButtonBox = ({ buttonInfoObject }) => {
   const test = useRecoilValue(matchRequest);
   return (
     <View style={styles.container}>
+      <Container duration={1000} />
       <View style={styles.Buttonbox}>
         <TouchableOpacity
           style={styles.button}
@@ -31,11 +33,14 @@ const ButtonBox = ({ buttonInfoObject }) => {
                   ...userInfo,
                 },
               })
-                .then((response) => {
-                  console.log(response.success);
+                .then(() => {
+                  Toast.success("회원가입에 성공했습니다.");
                   navigation.navigate(leftDest);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                  console.log(err);
+                  Toast.error("회원가입에 실패했습니다.");
+                });
             } else if (leftTitle === "온라인매칭") {
               setMatch({ ...test, isOnline: true });
               navigation.navigate(leftDest);

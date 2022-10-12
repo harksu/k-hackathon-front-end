@@ -10,6 +10,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Cookies } from "react-cookie";
+import Container, { Toast } from "toastify-react-native";
 
 const cookies = new Cookies();
 export const setCookie = (name, value, option) => {
@@ -36,11 +37,12 @@ const LoginScreen = () => {
           setCookie("authToken", accessToken, {
             path: "/",
           });
+          Toast.success("로그인에 성공했습니다.");
           goMain();
         });
     } catch (e) {
       console.log(e);
-      console.log("로그인 실패", e);
+      Toast.error("로그인에 실패했습니다.");
     }
   };
   const pwInput = useRef();
@@ -51,6 +53,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Container duration={1000} />
       <Text style={styles.title}>어디까지 가봤니?</Text>
       <View style={styles.box}>
         <TextInput
@@ -144,4 +147,7 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   logintext: { fontWeight: "bold", textAlign: "center", color: "white" },
+  test: {
+    flex: 0.5,
+  },
 });
