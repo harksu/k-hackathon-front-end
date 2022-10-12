@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   Keyboard,
+  Alert,
 } from "react-native";
 import axios from "axios";
 import React, { useRef, useState } from "react";
@@ -36,6 +37,7 @@ const LoginScreen = () => {
           setCookie("authToken", accessToken, {
             path: "/",
           });
+          Alert.alert("로그인되었습니다.");
           goMain();
         });
     } catch (e) {
@@ -87,7 +89,6 @@ const LoginScreen = () => {
         </Text>
         <TouchableOpacity
           onPress={() => {
-            console.log("회원가입 하러가기 눌렸습니다");
             navigation.navigate("회원가입");
           }}
         >
