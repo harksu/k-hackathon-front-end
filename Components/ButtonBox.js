@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useResetRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { selectedTag, sendSignUpData, matchRequest } from "../Atoms/atoms";
@@ -33,6 +33,7 @@ const ButtonBox = ({ buttonInfoObject }) => {
               })
                 .then((response) => {
                   console.log(response.success);
+                  Alert.alert("회원가입되었습니다.");
                   navigation.navigate(leftDest);
                 })
                 .catch((err) => console.log(err));
