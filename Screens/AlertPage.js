@@ -1,11 +1,36 @@
-import { View, Text, TouchableOpacity, Touchable } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Dimensions,
+} from "react-native";
 import UnderBar from "../Components/UnderBar";
 import { StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import instance from "../Lib/Request";
+import AlertItem from "../Components/Alert";
+import { GuideAlertData } from "../Data/GuideAlertData";
+const ITEM_HEIGHT = (Dimensions.get("window").height * 20) / 100;
 
 const AlertPage = () => {
   const [guideClick, setGuideClick] = useState(true);
-
+  const [guideAlert, setGuideAlert] = useState([]);
+  const getAlertList = async () => {
+    // try {
+    //   await instance.get("/api/matches/guider/list/waited").then((res) => {
+    //     setGuideAlert(res.data.result.data);
+    //     console.log(res.data);
+    //   });
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    setGuideAlert(GuideAlertData);
+    console.log(GuideAlertData);
+  };
+  useEffect(() => {
+    getAlertList();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.select}>
@@ -26,32 +51,30 @@ const AlertPage = () => {
           <Text style={styles.travelerText}>여행객</Text>
         </TouchableOpacity>
       </View>
-      {guideClick ? (
-        <View style={styles.AlertBox}>
-          <View style={styles.guideAlert}>
-            <View style={styles.guideAlertTextBox}>
-              <Text>00님의 매칭 신청</Text>
-            </View>
-            <View style={styles.guideAlertBtnBox}>
-              <View style={styles.confirmBtnBox}>
-                <TouchableOpacity style={styles.guideBtn}>
-                  <Text>수락</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.guideBtn}>
-                  <Text>거절</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.detailBtnBox}>
-                <TouchableOpacity style={styles.guideBtn}>
-                  <Text>자세히</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </View>
-      ) : (
-        <View style={styles.AlertBox}></View>
-      )}
+      <View style={styles.AlertBox}>
+        {guideClick ? (
+          guideAlert && (
+            <FlatList
+              style={{ flexGrow: 0 }}
+              data={guideAlert}
+              renderItem={({ item }) => (
+                <AlertItem
+                  matchId={item.matchId}
+                  name={item.name}
+                  setGuideAlert={setGuideAlert}
+                />
+              )}
+              getItemLayout={(data, index) => ({
+                length: ITEM_HEIGHT,
+                offset: ITEM_HEIGHT * index,
+                index,
+              })}
+            />
+          )
+        ) : (
+          <></>
+        )}
+      </View>
       <UnderBar />
     </View>
   );
@@ -81,7 +104,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   AlertBox: {
-    flex: 9,
+    flex: 6,
+    width: "100%",
+    height: "100%",
+    justifyContent: "flex-start",
   },
   guideAlert: {
     width: "80%",
