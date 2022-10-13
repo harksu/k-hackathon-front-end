@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
     hegiht: "100%",
     flexDirection: "column",
     justifyContent: "center",
-    //textAlign: "center",
     alignItems: "center",
-    //backgroundColor: "orange",
     padding: 2,
   },
   course: {

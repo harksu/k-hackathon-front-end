@@ -4,17 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { useRecoilState } from "recoil";
 import { matchRequest } from "../Atoms/atoms";
 import instance from "../Lib/Request";
-//버튼을 따로 분리
 const OrangeBtn = ({ text, name, guideId, event }) => {
   const navigation = useNavigation();
   const [match, setMatch] = useRecoilState(matchRequest);
   const goDetail = () => {
     if (text === "자세히") {
       navigation.push("디테일페이지", { name: name, guideId: guideId }); //여기서 props 같이 남겨야됨 ;
-      // console.log(name); // 이제 이걸로 북치고 장구치고 하면 될 듯
     } else if (text === "신청") {
-      console.log("클릭시작");
-
       setMatch({ ...match, userRequest: "없습니다." });
       console.log({ ...match });
       setTimeout(() => {

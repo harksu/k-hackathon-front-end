@@ -1,5 +1,3 @@
-//가이드 리스트 페이지
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -71,7 +69,6 @@ const GuideList = () => {
     } catch (e) {
       console.log(e);
     }
-    // setGuideList(ListData);
   }, []);
   return (
     <View style={styles.container}>

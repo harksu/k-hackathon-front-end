@@ -1,7 +1,10 @@
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const UnderBar = () => {
+  const navigation = useNavigation();
+  //이거 라우터도 같이 고민 ㄱ
   return (
     <View style={styles.container}>
       <TouchableOpacity>
@@ -20,20 +23,17 @@ const UnderBar = () => {
   );
 };
 
-//이미지 라우팅 할 때 이미지 색깔 변경하려면, 이미지 자체를 바꿔야 될 듯
-
 export default UnderBar;
 
 const styles = StyleSheet.create({
   container: {
     flex: 0.5,
     width: "100%",
-    // backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
     shadowColor: "black",
-    shadowOpacity: 1, //이게 자꾸 씹힘
+    shadowOpacity: 1,
     shadowRadius: 10,
     shadowOffset: {
       height: 2,

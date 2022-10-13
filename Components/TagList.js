@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import Tag from "./Tag";
 import { TAGDATA } from "./../Data/tagData";
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignContent: "center",
-    //backgroundColor: "pink",
     flexWrap: "wrap",
   },
   text: { textAlign: "center" },

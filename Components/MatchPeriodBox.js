@@ -1,13 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useSetRecoilState } from "recoil";
 import { matchRequest } from "../Atoms/atoms";
 
 const MatchPeriodBox = () => {
-  // const periodInputRef = useRef();
-  // const [period, setPeriod] = useState("");
-  //이거 전에 컴포넌트에서 사용하던 hooks들인데, 어차피 분리한 김에 그냥 너 마음대로 코드 짜도 될 것 같아!
   const [startDateVisible, setStartDateVisible] = useState(false);
   const [endDateVisible, setEndDateVisible] = useState(false);
   const [startDate, setStartDate] = useState("");
@@ -74,8 +71,6 @@ const MatchPeriodBox = () => {
             };
           });
           setEndDate(date);
-
-          console.log("gd");
           setEndDateVisible(false);
         }}
         onCancel={() => setEndDateVisible(false)}
@@ -90,7 +85,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 0.8,
     alignItems: "center",
-    //backgroundColor: "pink",
   },
   box: {
     alignItems: "flex-start",

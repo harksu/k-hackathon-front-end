@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { RecoilRoot } from "recoil";
+import axios from "axios";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./Screens/LoginScreen";
@@ -11,7 +11,6 @@ import DetailPage from "./Screens/DetailPage";
 import MatchScreen from "./Screens/MatchScreen";
 import GuideSignUpScreen from "./Screens/GuideSignUpScreen";
 import AlertPage from "./Screens/AlertPage";
-import axios from "axios";
 
 const Stack = createNativeStackNavigator();
 

@@ -20,7 +20,6 @@ export default SelectedBox;
 const styles = StyleSheet.create({
   container: {
     flex: 1.3,
-    //backgroundColor: "pink",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -30,14 +29,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "80%",
     marginBottom: 10,
-    //backgroundColor: "pink",
   },
   tagbox: {
     width: "80%",
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
-    //backgroundColor: "pink",
     flex: 0.5,
     flexDirection: "row",
     justifyContent: "space-around",

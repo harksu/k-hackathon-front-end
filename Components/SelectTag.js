@@ -13,7 +13,6 @@ export default SelectTag;
 
 const styles = StyleSheet.create({
   clickedContainer: {
-    // flex: 1,
     width: "22%",
     backgroundColor: "#F1694E",
     height: 45,

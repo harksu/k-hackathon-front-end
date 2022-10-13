@@ -12,14 +12,13 @@ const InputBox = () => {
 
   const [name, setName] = useState("");
   const [id, setId] = useState("");
-  const [password, setPassword] = useState(""); //이거 나중에 서버에 보내면 그 때 다 clear
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [focusInput, setFocusInput] = useState(nameInputRef);
 
   const setData = useSetRecoilState(sendSignUpData);
   const selected = useRecoilValue(selectedTag);
-  const test = useRecoilValue(sendSignUpData);
   return (
     <View style={styles.container}>
       <View

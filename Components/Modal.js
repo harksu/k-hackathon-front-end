@@ -8,7 +8,7 @@ const Modal = () => {
   const { online, userRequest, period } = match;
   return (
     <View style={styles.modalContainer}>
-      <Text>요청 정보는 {online}입니다.</Text>
+      <Text>요청 정보는 {online ? "온라인" : "오프라인"}입니다.</Text>
       <Text>요청 정보는 {userRequest}입니다.</Text>
       <Text>요청 정보는 {period}입니다.</Text>
     </View>

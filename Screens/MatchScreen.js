@@ -26,7 +26,6 @@ const MatchScreen = () => {
   const [stateValue, setStateValue] = useState(""); // 두번째 선택
   const [sendLocationData, setSendLocationData] = useState(""); //서버에 보낼 값(또한 드롭퍼를 닫더라도 무엇을 골랐는지 알게 하기 위함
   const [detailLocationList, setDetailLocationList] = useState([]); //지역에 따른 조건부 선택을 위한 state
-  const setMatch = useSetRecoilState(matchRequest);
 
   const buttonInfoObject = {
     leftTitle: "온라인매칭",

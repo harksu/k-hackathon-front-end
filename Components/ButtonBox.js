@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useResetRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { selectedTag, sendSignUpData, matchRequest } from "../Atoms/atoms";
 import { useNavigation } from "@react-navigation/native";
@@ -8,7 +8,6 @@ import axios from "axios";
 const ButtonBox = ({ buttonInfoObject }) => {
   const navigation = useNavigation();
   const { leftTitle, rightTitle, leftDest, rightDest } = buttonInfoObject;
-  //재사용을 위한 props 설정
   const userInfo = useRecoilValue(sendSignUpData);
   const resetInfo = useResetRecoilState(sendSignUpData);
   const resetSelectTag = useResetRecoilState(selectedTag);
@@ -21,12 +20,9 @@ const ButtonBox = ({ buttonInfoObject }) => {
           style={styles.button}
           onPress={() => {
             if (leftTitle === "회원가입") {
-              console.log(userInfo);
               axios({
                 method: "post",
                 url: `/api/sign-up`,
-                // headers: { "Access-Control-Allow-Origin": "*" },
-                // //지금 이거 CORS 테스트중이고, 현재 데이터 보내려면 무조건 ENTER로 넘겨야됨
                 data: {
                   ...userInfo,
                 },
@@ -48,15 +44,15 @@ const ButtonBox = ({ buttonInfoObject }) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            //navigation.navigate(rightDest);
             if (rightTitle === "취소하기") {
               console.log("취소합니다");
               resetInfo();
               resetSelectTag();
               navigation.goBack();
             } else if (rightTitle === "오프라인매칭")
-              navigation.navigate(rightDest);
-          }} // 일단 테스트
+              setMatch({ ...test, isOnline: false });
+            navigation.navigate(rightDest);
+          }}
         >
           <Text style={styles.text}>{rightTitle}</Text>
         </TouchableOpacity>
@@ -73,7 +69,6 @@ const styles = StyleSheet.create({
     width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
-    //backgroundColor: "green",
   },
   Buttonbox: {
     flex: 1,
