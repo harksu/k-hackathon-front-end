@@ -1,34 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import instance from "../Lib/Request";
 import { useNavigation } from "@react-navigation/native";
 
-const AlertItem = ({ matchId, name, setGuideAlert }) => {
-  const navigate = useNavigation();
+const AlertItem = ({
+  matchId,
+  name,
+  setGuideAlert,
+  setModalVisible,
+  setPressId,
+}) => {
   const handleAccept = async () => {
-    // try {
-    //   await instance
-    //     .post(`/api/matches/guider/list/waited/${matchId}`)
-    //     .then(() => {
-    //       Alert.alert("요청이 수락되었습니다.");
-    //       setGuideAlert((prev) =>
-    //         prev.filter((item) => item.matchId !== matchId)
-    //       );
-    //       // navigate.push('')
-    //     });
-    // } catch (e) {
-    //   console.log(e);
-    // }
-    Alert.alert("요청이 수락되었습니다.");
-    setGuideAlert((prev) => prev.filter((item) => item.matchId !== matchId));
+    try {
+      await instance
+        .post(`/api/matches/guider/list/waited/${matchId}`)
+        .then(() => {
+          Alert.alert("요청이 수락되었습니다.");
+          setGuideAlert((prev) =>
+            prev.filter((item) => item.matchId !== matchId)
+          );
+        });
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   const handleRefuse = () => {
     Alert.alert("요청이 거절되었습니다.");
     setGuideAlert((prev) => prev.filter((item) => item.matchId !== matchId));
   };
-  const handleDetail = () => {
-    console.log("자세히 모달");
-  };
+  const navigate = useNavigation();
   return (
     <View style={styles.Container}>
       <View style={styles.guideAlert}>
@@ -45,7 +46,13 @@ const AlertItem = ({ matchId, name, setGuideAlert }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.detailBtnBox}>
-            <TouchableOpacity onPress={handleDetail} style={styles.guideBtn}>
+            <TouchableOpacity
+              onPress={() => {
+                setModalVisible((prev) => !prev);
+                setPressId(matchId);
+              }}
+              style={styles.guideBtn}
+            >
               <Text>자세히</Text>
             </TouchableOpacity>
           </View>
