@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, TextInput, Keyboard } from "react-native";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import DetailInfo from "../Components/DetailInfo";
 import SelectTagList from "../Components/SelectTagList";
 import Level from "../Components/Level";
-import UnderBar from "../Components/UnderBar";
 import instance from "../Lib/Request";
 import { getCookie } from "./LoginScreen";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -12,10 +11,10 @@ import { matchRequest, modal } from "../Atoms/atoms";
 const Modal = () => {
   const match = useRecoilValue(matchRequest);
 
-  const { online, userRequest, period } = match;
+  const { isOnline, userRequest, period } = match;
   return (
     <View style={styles.modalContainer}>
-      <Text>요청 가이드 방식은 {online ? "온라인" : "오프라인"}입니다.</Text>
+      <Text>요청 가이드 방식은 {isOnline ? "온라인" : "오프라인"}입니다.</Text>
       <Text>요청 정보는 {userRequest}입니다.</Text>
       <Text>요청 기간은 {period}입니다.</Text>
     </View>
@@ -45,9 +44,7 @@ const DetailPage = ({ route }) => {
           setIsOnlyOnline(res.data.result.data.onlineGuiding);
           setLoading(false);
         });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   useEffect(() => {
     getGuideData();
@@ -103,7 +100,6 @@ const DetailPage = ({ route }) => {
               />
             </View>
           )}
-          <UnderBar />
         </>
       )}
     </View>

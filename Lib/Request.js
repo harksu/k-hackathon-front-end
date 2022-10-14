@@ -12,10 +12,5 @@ instance.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
-// instance.interceptors.response.use(null, (err) => {
-//   if (err.config && err.response && err.response.status === "401") {
-//     err.config.headers = { Authorization: `Bearer ${getCookie("authToken")}` };
-//     console.log("token : ", err.config.headers.Authorization);
-//   }
-// });
+
 export default instance;

@@ -21,9 +21,6 @@ const ITEM_HEIGHT = (Dimensions.get("window").height * 30) / 100;
 export const Item = (
   { name, discription, guideId } //FlatList에서 띄우고자 하는 item 컴포넌트 확인하시면 바로 분리할게요
 ) => {
-  const handleClick = () => {
-    console.log("click");
-  };
   return (
     <View style={styles.item}>
       <Image style={styles.img} source={GuideImg} />
@@ -41,7 +38,7 @@ export const Item = (
           />
         </View>
         <View style={styles.btnContainer}>
-          <OrangeBtn event={handleClick} text={"신청"} />
+          <OrangeBtn text={"신청"} />
         </View>
       </View>
     </View>
@@ -56,7 +53,6 @@ const GuideList = () => {
   const test = useRecoilValue(matchRequest);
 
   useEffect(() => {
-    console.log(test);
     try {
       instance("/api/guides/all", {
         headers: {
@@ -66,9 +62,7 @@ const GuideList = () => {
         setGuideList(res.data.result.data);
         setIsLoading(false);
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }, []);
   return (
     <View style={styles.container}>
