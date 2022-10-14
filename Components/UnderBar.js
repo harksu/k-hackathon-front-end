@@ -4,13 +4,15 @@ import { useNavigation } from "@react-navigation/native";
 
 const UnderBar = () => {
   const navigation = useNavigation();
-  //이거 라우터도 같이 고민 ㄱ
+  const goAlert = () => {
+    navigation.push("알림함페이지");
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity>
         <Image source={require("../assets/feather_search.png")} />
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={goAlert}>
         <Image source={require("../assets/Profile.png")} />
       </TouchableOpacity>
       <TouchableOpacity>
