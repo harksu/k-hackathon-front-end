@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import instance from "../Lib/Request";
 import AlertItem from "../Components/Alert";
 import SelectedBox from "../Components/SelectedBox";
+import { useNavigation } from "@react-navigation/native";
 
 const AlertPage = () => {
   const [guideClick, setGuideClick] = useState(true);
@@ -20,6 +21,7 @@ const AlertPage = () => {
   const [pressId, setPressId] = useState();
   const [matchData, setMatchData] = useState();
   const [matchLoading, setMatchLoading] = useState(true);
+  const navigate = useNavigation();
   const handleAccept = async (matchId) => {
     try {
       await instance
@@ -30,12 +32,26 @@ const AlertPage = () => {
             prev.filter((item) => item.matchId !== matchId)
           );
           setModalVisible((prev) => !prev);
+          navigate.push("온라인가이딩");
         });
     } catch (e) {
       console.log(e);
     }
   };
-  const handleRefuse = (matchId) => {
+  const handleRefuse = async (matchId) => {
+    try {
+      await instance
+        .delete(`/api/matches/guider/list/waited/${matchId}`)
+        .then(() => {
+          Alert.alert("요청이 거절되었습니다.");
+          setGuideAlert((prev) =>
+            prev.filter((item) => item.matchId !== matchId)
+          );
+          setModalVisible((prev) => !prev);
+        });
+    } catch (e) {
+      console.log(e);
+    }
     Alert.alert("요청이 거절되었습니다.");
     setGuideAlert((prev) => prev.filter((item) => item.matchId !== matchId));
     setModalVisible((prev) => !prev);
