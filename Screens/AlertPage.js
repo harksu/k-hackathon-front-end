@@ -46,10 +46,9 @@ const AlertPage = () => {
           );
           setModalVisible((prev) => !prev);
         });
-    } catch (e) {}
-    Alert.alert("요청이 거절되었습니다.");
-    setGuideAlert((prev) => prev.filter((item) => item.matchId !== matchId));
-    setModalVisible((prev) => !prev);
+    } catch (e) {
+      console.log(e);
+    }
   };
   const getAlertList = async () => {
     try {
