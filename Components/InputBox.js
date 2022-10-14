@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Keyboard } from "react-native";
+import { StyleSheet, View, TextInput, Keyboard } from "react-native";
 import React, { useState, useRef } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { sendSignUpData, selectedTag } from "../Atoms/atoms";

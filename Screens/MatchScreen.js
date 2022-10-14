@@ -8,16 +8,14 @@ import {
 } from "react-native";
 import React, { useRef, useState } from "react";
 import SearchableDropdown from "react-native-searchable-dropdown";
-import Title from "../Components/Title";
 import PlaceImage from "../Components/PlaceImage";
 import SelectedBox from "../Components/SelectedBox";
 import MatchLocationBox from "../Components/MatchLocationBox";
 import MatchPeriodBox from "../Components/MatchPeriodBox";
 import ButtonBox from "../Components/ButtonBox";
-import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { selectedTag, matchRequest } from "./../Atoms/atoms";
+import { useRecoilValue } from "recoil";
+import { selectedTag } from "./../Atoms/atoms";
 
 const MatchScreen = () => {
   const drawer = useRef(null);
@@ -36,7 +34,6 @@ const MatchScreen = () => {
 
   const conditionSelect = (itemlist, name) => {
     if (itemlist !== CITY) {
-      console.log("이거 아니에요");
       return;
     }
     if (name === "제주도") {
@@ -111,7 +108,6 @@ const MatchScreen = () => {
       <Button
         title="선택 완료"
         onPress={() => {
-          // setMatch({ location: sendLocationData });
           drawer.current.closeDrawer();
         }}
       />
@@ -154,7 +150,6 @@ const MatchScreen = () => {
           </Text>
         </View>
         <ButtonBox buttonInfoObject={buttonInfoObject} />
-        <UnderBar />
       </View>
     </DrawerLayoutAndroid>
   );
@@ -167,11 +162,9 @@ const styles = StyleSheet.create({
   sideContainer: {
     flex: 1,
     justifyContent: "flex-start",
-    //backgroundColor: "pink",
   },
   touchContainer: {
     flex: 0.5,
-    //backgroundColor: "yellow",
     justifyContent: "center",
   },
   dateContainer: {
@@ -181,7 +174,6 @@ const styles = StyleSheet.create({
   textBox: {
     flex: 0.7,
     width: "80%",
-    // backgroundColor: "pink",
     marginLeft: "auto",
     marginRight: "auto",
     justifyContent: "center",

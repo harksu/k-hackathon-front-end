@@ -28,11 +28,10 @@ const ButtonBox = ({ buttonInfoObject }) => {
                 },
               })
                 .then((response) => {
-                  console.log(response.success);
                   Alert.alert("회원가입되었습니다.");
                   navigation.navigate(leftDest);
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => Alert.alert(err));
             } else if (leftTitle === "온라인매칭") {
               setMatch({ ...test, isOnline: true });
               navigation.navigate(leftDest);
@@ -45,7 +44,6 @@ const ButtonBox = ({ buttonInfoObject }) => {
           style={styles.button}
           onPress={() => {
             if (rightTitle === "취소하기") {
-              console.log("취소합니다");
               resetInfo();
               resetSelectTag();
               navigation.goBack();

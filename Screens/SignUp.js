@@ -1,11 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
-import Title from "../Components/Title";
 import InputBox from "../Components/InputBox";
 import TagBox from "../Components/TagBox";
 import SelectedBox from "../Components/SelectedBox";
 import ButtonBox from "../Components/ButtonBox";
-import UnderBar from "../Components/UnderBar";
 import { selectedTag } from "../Atoms/atoms";
 import { useRecoilValue } from "recoil";
 
@@ -23,7 +21,6 @@ const SignUp = () => {
       <TagBox />
       <SelectedBox tagList={selectedTagList} />
       <ButtonBox buttonInfoObject={buttonInfoObject} />
-      <UnderBar />
     </View>
   );
 };

@@ -12,11 +12,9 @@ import {
 import React, { useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
-import Title from "../Components/Title";
 import PlaceImage from "../Components/PlaceImage";
 import SelectedBox from "../Components/SelectedBox";
 import MatchLocationBox from "../Components/MatchLocationBox";
-import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
 import instance from "./../Lib/Request";
 import { useRecoilValue } from "recoil";
@@ -34,17 +32,9 @@ const GuideSignUpScreen = () => {
   const [premiumPirce, setPremiumPirce] = useState(0);
   const [introuduce, setIntroduce] = useState(""); // 그냥 이번 플젝은 코드 다 state로 쪼개서 하자..
 
-  const buttonInfoObject = {
-    leftTitle: "온라인등록",
-    rightTitle: "오프라인등록",
-    leftDest: "가이드리스트",
-    rightDest: "가이드리스트",
-  };
-
   const TagList = useRecoilValue(selectedTag);
   const conditionSelect = (itemlist, name) => {
     if (itemlist !== CITY) {
-      console.log("이거 아니에요");
       return;
     }
     if (name === "제주도") {
@@ -169,11 +159,10 @@ const GuideSignUpScreen = () => {
                 },
               })
               .then((response) => {
-                console.log(response);
                 Alert.alert("등록성공");
                 navigation.push("메인페이지");
               })
-              .catch((err) => console.log(err));
+              .catch();
           }}
         >
           <Text style={styles.buttontext}>오프라인등록</Text>
@@ -242,7 +231,6 @@ const GuideSignUpScreen = () => {
           />
         </View>
         <GuideSignUpButton />
-        <UnderBar />
       </View>
     </DrawerLayoutAndroid>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import GuideList from "../Components/GuideList";
-import UnderBar from "../Components/UnderBar";
 
 const GuideListPage = () => {
   return (
@@ -12,7 +11,6 @@ const GuideListPage = () => {
       <View style={styles.guideListContainer}>
         <GuideList />
       </View>
-      <UnderBar />
     </View>
   );
 };
