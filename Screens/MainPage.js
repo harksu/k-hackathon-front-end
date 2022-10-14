@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Title from "../Components/Title";
 import { View, StyleSheet, Text } from "react-native";
 import SelectedBox from "../Components/SelectedBox";
 import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
-import instance from "../Lib/Request";
 import { useSetRecoilState } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
 import axios from "axios";
@@ -19,7 +17,6 @@ const MainPage = () => {
       await axios.get("/api/tags").then((res) => {
         setMyTag(res.data.result.data);
         setTag(res.data.result.data);
-        console.log(res.data.result.data);
       });
     } catch (e) {
       console.log(e);
@@ -53,7 +50,6 @@ const styles = StyleSheet.create({
     flex: 0.6,
     flexDirection: "row",
     width: "90%",
-    // backgroundColor: "pink",
     marginLeft: "auto",
     marginRight: "auto",
   },

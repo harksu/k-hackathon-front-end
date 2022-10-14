@@ -19,7 +19,6 @@ const SignUp = () => {
   };
   return (
     <View style={styles.container}>
-      {/* // <Title title="회원 가입" /> */}
       <InputBox />
       <TagBox />
       <SelectedBox tagList={selectedTagList} />

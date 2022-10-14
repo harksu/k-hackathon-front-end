@@ -7,17 +7,17 @@ import {
   Keyboard,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import React, { useRef, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import Title from "../Components/Title";
 import PlaceImage from "../Components/PlaceImage";
 import SelectedBox from "../Components/SelectedBox";
 import MatchLocationBox from "../Components/MatchLocationBox";
-import ButtonBox from "../Components/ButtonBox";
 import UnderBar from "../Components/UnderBar";
 import { CITY, STATE, TEST } from "../Data/locationData";
-import axios from "axios";
 import instance from "./../Lib/Request";
 import { useRecoilValue } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
@@ -33,7 +33,6 @@ const GuideSignUpScreen = () => {
   const [basicPirce, setBasicPrice] = useState(0);
   const [premiumPirce, setPremiumPirce] = useState(0);
   const [introuduce, setIntroduce] = useState(""); // 그냥 이번 플젝은 코드 다 state로 쪼개서 하자..
-  const [isOffline, setIsOffline] = useState(false); //오프라인 설정은 일단 디폴트가 false, 이건 필요없을듯
 
   const buttonInfoObject = {
     leftTitle: "온라인등록",
@@ -58,6 +57,8 @@ const GuideSignUpScreen = () => {
       //이거 마지막에 데이터 배열 추가할 때 아무것도 없으면 마지막에 else로 빼야 겠다
     }
   };
+
+  const navigation = useNavigation();
 
   const DrawBar = ({ itemList, placeholder, value }) => (
     <SearchableDropdown
@@ -126,20 +127,6 @@ const GuideSignUpScreen = () => {
     </View>
   );
 
-  const PriceChoice = ({ name, price, event, value }) => (
-    <View style={styles.priceInputContainer}>
-      <Text>{name}</Text>
-      <TextInput
-        placeholder={price}
-        value={value}
-        onChangeText={event}
-        textAlign={"center"}
-        //blurOnSubmit={false}
-      />
-    </View>
-  );
-  //위 컴포넌트를 사용하면 리렌더링때문에 입력할 때 화병남
-
   const GuideSignUpButton = () => (
     <View style={styles.buttonContainer}>
       <View style={styles.Buttonbox}>
@@ -157,8 +144,10 @@ const GuideSignUpScreen = () => {
                   gu: stateValue,
                 },
               })
-              .then((response) => {
-                console.log(response);
+              .then((res) => {
+                console.log(res);
+                Alert.alert("등록성공");
+                navigation.push("메인페이지");
               })
               .catch((err) => console.log(err));
           }}
@@ -181,6 +170,8 @@ const GuideSignUpScreen = () => {
               })
               .then((response) => {
                 console.log(response);
+                Alert.alert("등록성공");
+                navigation.push("메인페이지");
               })
               .catch((err) => console.log(err));
           }}
@@ -251,7 +242,6 @@ const GuideSignUpScreen = () => {
           />
         </View>
         <GuideSignUpButton />
-        {/* <ButtonBox buttonInfoObject={buttonInfoObject} /> */}
         <UnderBar />
       </View>
     </DrawerLayoutAndroid>
@@ -265,18 +255,15 @@ const styles = StyleSheet.create({
   sideContainer: {
     flex: 1,
     justifyContent: "flex-start",
-    //backgroundColor: "pink",
   },
   touchContainer: {
     flex: 0.5,
-    //backgroundColor: "yellow",
     justifyContent: "center",
   },
   priceContainer: {
     flex: 0.5,
     flexDirection: "row",
     justifyContent: "space-around",
-    //backgroundColor: "pink",
     width: "80%",
     marginLeft: "auto",
     marginRight: "auto",
@@ -294,7 +281,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
-    //backgroundColor: "pink",
   },
   text: { textAlign: "left", fontSize: 10 },
   choiceText: {

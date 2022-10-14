@@ -15,9 +15,9 @@ const Modal = () => {
   const { online, userRequest, period } = match;
   return (
     <View style={styles.modalContainer}>
-      <Text>요청 정보는 {online}입니다.</Text>
+      <Text>요청 가이드 방식은 {online ? "온라인" : "오프라인"}입니다.</Text>
       <Text>요청 정보는 {userRequest}입니다.</Text>
-      <Text>요청 정보는 {period}입니다.</Text>
+      <Text>요청 기간은 {period}입니다.</Text>
     </View>
   );
 };
@@ -126,31 +126,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "80%",
     marginBottom: 10,
-    //backgroundColor: "pink",
   },
   modalContainer: {
     flex: 10,
-    backgroundColor: "pink",
+    borderWidth: 2,
+    borderColor: "rgba(230, 230, 230, .5)",
+    borderRadius: 20,
     hegiht: "80%",
+    justifyContent: "center",
+    alignItems: "flex-start",
   },
   TagListContainer: {
     width: "80%",
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
-    // backgroundColor: "pink",
-    //flex: 0.5,
     flexDirection: "row",
     justifyContent: "space-around",
     alignContent: "center",
     padding: 10,
   },
-
   courseBox: {
     flex: 0.4,
-    // backgroundColor: "pink",
     width: "80%",
-    // overflow: "scroll",
   },
   temp: {
     flex: 1.2,
@@ -159,7 +157,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "rgba(230, 230, 230, .5)",
     borderRadius: 20,
-    // backgroundColor: "red",
     width: "80%",
     overflow: "scroll",
   },

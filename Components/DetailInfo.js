@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import GuideImg from "../assets/Guide.png";
 import instance from "../Lib/Request";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -20,12 +20,15 @@ const DetailInfo = ({ name, guideId }) => {
   const setmodal = useSetRecoilState(modal);
   const onpress = () => {
     setmodal(!ismodal);
-    console.log(ismodal);
-    console.log({ ...match });
     instance
       .post(`/api/matches/${guideId}`, { ...match })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
+    if (!ismodal) {
+      setTimeout(() => {
+        setmodal(false);
+      }, 2000);
+    }
   };
 
   return (
@@ -43,8 +46,6 @@ const DetailInfo = ({ name, guideId }) => {
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* <View style={styles.textBox}></View> */}
     </View>
   );
 };
@@ -55,9 +56,7 @@ const styles = StyleSheet.create({
   container: {
     width: ITEM_WIDTH,
     height: ITEM_HEIGHT,
-    //flex: 1,
     flexDirection: "row",
-    //backgroundColor: "pink",
     marginHorizontal: 10,
     marginVertical: 10,
     borderWidth: 1,
@@ -74,12 +73,8 @@ const styles = StyleSheet.create({
   modalContainer: { flex: 2, height: "100%", backgroundColor: "pink" },
   infoBox: {
     flex: 1,
-    // widht: "30%",
     height: "100%",
-    //textAlign: "center",
     justifyContent: "space-around",
-    // alignContent: "center",
-    // backgroundColor: "green",
     padding: 2,
   },
   Buttonbox: {
@@ -87,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    //backgroundColor: "orange",
   },
   button: {
     width: "33%",

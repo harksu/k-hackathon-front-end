@@ -48,7 +48,7 @@ const LoginScreen = () => {
   const pwInput = useRef();
   const navigation = useNavigation();
   const goMain = () => {
-    navigation.push("메인페이지"); //메인페이지로 넘기는데 props가 필요할까?
+    navigation.push("메인페이지");
   };
 
   return (

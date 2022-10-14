@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     flex: 0.2,
     width: "80%",
-    //backgroundColor: "red",
     marginLeft: "auto",
     marginRight: "auto",
   },

@@ -21,26 +21,60 @@ export const CITY = [
   },
 ];
 
+// 여기 뭐 추가할 지 얘기하기
+
 export const STATE = [
   {
     id: 1,
-    name: "제주도1",
+    name: "제주시",
   },
   {
     id: 2,
-    name: "서울2",
+    name: "조천읍",
   },
   {
     id: 3,
-    name: "용인3",
+    name: "구좌읍",
   },
   {
     id: 4,
-    name: "부산4",
+    name: "성산읍",
   },
   {
     id: 5,
-    name: "testset5",
+    name: "표선면",
+  },
+  {
+    id: 6,
+    name: "남원읍",
+  },
+  {
+    id: 7,
+    name: "서귀포시",
+  },
+  {
+    id: 8,
+    name: "증문",
+  },
+  {
+    id: 9,
+    name: "안덕면",
+  },
+  {
+    id: 10,
+    name: "대정면",
+  },
+  {
+    id: 11,
+    name: "한경면",
+  },
+  {
+    id: 12,
+    name: "한림면",
+  },
+  {
+    id: 13,
+    name: "애월읍",
   },
 ];
 
