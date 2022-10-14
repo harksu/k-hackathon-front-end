@@ -12,14 +12,13 @@ const OrangeBtn = ({ text, name, guideId, event }) => {
       navigation.push("디테일페이지", { name: name, guideId: guideId }); //여기서 props 같이 남겨야됨 ;
     } else if (text === "신청") {
       setMatch({ ...match, userRequest: "없습니다." });
-      console.log({ ...match });
       setTimeout(() => {
         instance
           .post(`/api/matches/${guideId}`, {
             ...match,
           })
-          .then((res) => console.log(res))
-          .catch((err) => console.log(err));
+          .then()
+          .catch();
       }, 500);
     }
   };

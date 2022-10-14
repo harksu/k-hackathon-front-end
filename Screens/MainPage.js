@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SelectedBox from "../Components/SelectedBox";
-import UnderBar from "../Components/UnderBar";
 import Recommend from "../Components/Recommend";
 import ApplyBtn from "../Components/ApplyBtn";
 import { useSetRecoilState } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
 import axios from "axios";
-import { getCookie } from "./LoginScreen";
 
 const MainPage = () => {
   const [myTag, setMyTag] = useState([]);
@@ -18,16 +16,12 @@ const MainPage = () => {
         setMyTag(res.data.result.data);
         setTag(res.data.result.data);
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   useEffect(() => {
     setTimeout(() => {
       getMyTag();
     }, 500);
-
-    console.log(`${getCookie("authToken")}`);
   }, []);
   return (
     <View style={styles.container}>
@@ -37,7 +31,6 @@ const MainPage = () => {
         <ApplyBtn name="관광객 등록" destnation="매칭페이지" />
         <ApplyBtn name="가이드 등록" destnation="가이드매칭페이지" />
       </View>
-      <UnderBar />
     </View>
   );
 };

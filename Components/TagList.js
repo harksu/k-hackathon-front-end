@@ -5,7 +5,6 @@ import { TAGDATA } from "./../Data/tagData";
 
 const TagList = () => {
   const TagData = TAGDATA;
-  console.log(TagData);
   return (
     <View style={styles.container}>
       {TagData?.map((tag) => (

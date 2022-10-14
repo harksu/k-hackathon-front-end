@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import instance from "../Lib/Request";
 import { useNavigation } from "@react-navigation/native";
@@ -20,9 +20,7 @@ const AlertItem = ({
             prev.filter((item) => item.matchId !== matchId)
           );
         });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const handleRefuse = () => {

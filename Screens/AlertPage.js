@@ -6,7 +6,6 @@ import {
   Modal,
   Alert,
 } from "react-native";
-import UnderBar from "../Components/UnderBar";
 import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import instance from "../Lib/Request";
@@ -34,9 +33,7 @@ const AlertPage = () => {
           setModalVisible((prev) => !prev);
           navigate.push("온라인가이딩");
         });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   const handleRefuse = async (matchId) => {
     try {
@@ -49,9 +46,7 @@ const AlertPage = () => {
           );
           setModalVisible((prev) => !prev);
         });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
     Alert.alert("요청이 거절되었습니다.");
     setGuideAlert((prev) => prev.filter((item) => item.matchId !== matchId));
     setModalVisible((prev) => !prev);
@@ -60,11 +55,8 @@ const AlertPage = () => {
     try {
       await instance.get("/api/matches/guider/list/waited").then((res) => {
         setGuideAlert(res.data.result.data);
-        console.log(res.data);
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   const getDetailData = async (matchId) => {
     try {
@@ -72,9 +64,7 @@ const AlertPage = () => {
         setMatchData(res.data.result.data);
         setMatchLoading(false);
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
   useEffect(() => {
     if (pressId) {
@@ -185,7 +175,6 @@ const AlertPage = () => {
           <></>
         )}
       </View>
-      <UnderBar />
     </View>
   );
 };
