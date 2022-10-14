@@ -52,9 +52,6 @@ const AlertPage = () => {
     } catch (e) {
       console.log(e);
     }
-    Alert.alert("요청이 거절되었습니다.");
-    setGuideAlert((prev) => prev.filter((item) => item.matchId !== matchId));
-    setModalVisible((prev) => !prev);
   };
   const getAlertList = async () => {
     try {
