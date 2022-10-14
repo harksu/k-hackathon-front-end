@@ -20,10 +20,11 @@ const DetailInfo = ({ name, guideId }) => {
   const setmodal = useSetRecoilState(modal);
   const onpress = () => {
     setmodal(!ismodal);
+    console.log(guideId, match);
     instance
-      .post(`/api/matches/${guideId}`, { ...match })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .post(`/api/matches/${guideId}`, match)
+      .then((res) => console.log("response", res))
+      .catch((err) => console.log(err.response.data.result.msg));
     if (!ismodal) {
       setTimeout(() => {
         setmodal(false);

@@ -20,7 +20,7 @@ const App = () => {
   return (
     <RecoilRoot>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="온라인가이딩">
+        <Stack.Navigator initialRouteName="로그인페이지">
           <Stack.Screen name="로그인페이지" component={LoginScreen} />
           <Stack.Screen name="회원가입" component={SignUp} />
           <Stack.Screen name="알림함페이지" component={AlertPage} />
