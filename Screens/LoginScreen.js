@@ -40,7 +40,9 @@ const LoginScreen = () => {
           Alert.alert("로그인되었습니다.");
           goMain();
         });
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
   const pwInput = useRef();
   const navigation = useNavigation();

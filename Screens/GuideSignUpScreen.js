@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import PlaceImage from "../Components/PlaceImage";
 import SelectedBox from "../Components/SelectedBox";
+import Title from "../Components/Title";
 import MatchLocationBox from "../Components/MatchLocationBox";
 import { CITY, STATE, TEST } from "../Data/locationData";
 import instance from "./../Lib/Request";

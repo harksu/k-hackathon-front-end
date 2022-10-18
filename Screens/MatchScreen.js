@@ -13,6 +13,7 @@ import SelectedBox from "../Components/SelectedBox";
 import MatchLocationBox from "../Components/MatchLocationBox";
 import MatchPeriodBox from "../Components/MatchPeriodBox";
 import ButtonBox from "../Components/ButtonBox";
+import Title from "../Components/Title";
 import { CITY, STATE, TEST } from "../Data/locationData";
 import { useRecoilValue } from "recoil";
 import { selectedTag } from "./../Atoms/atoms";
