@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import SelectedBox from "../Components/SelectedBox";
-import { TAGDATA } from "../Data/tagData";
-const OnlineGuidePage = () => {
+// import { TAGDATA } from "../Data/tagData";
+
+const OnlineGuidePage = ({ tagList }) => {
   const [text, setText] = useState("");
   return (
     <View style={styles.container}>
-      <SelectedBox tagList={TAGDATA} />
+      <SelectedBox tagList={tagList} />
       <View style={styles.textBox}>
         <TextInput
           onChangeText={setText}

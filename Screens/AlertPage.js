@@ -31,7 +31,9 @@ const AlertPage = () => {
             prev.filter((item) => item.matchId !== matchId)
           );
           setModalVisible((prev) => !prev);
-          navigate.push("온라인가이딩");
+          navigate.push("온라인가이딩", {
+            tagList: matchData.userInfo.tags,
+          });
         });
     } catch (e) {}
   };
