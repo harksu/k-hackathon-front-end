@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,11 @@ import {
 import SelectedBox from "../Components/SelectedBox";
 // import { TAGDATA } from "../Data/tagData";
 
-const OnlineGuidePage = ({ tagList }) => {
+const OnlineGuidePage = ({ route }) => {
+  const { tagList } = route.params;
+  useEffect(() => {
+    console.log(tagList);
+  }, []);
   const [text, setText] = useState("");
   return (
     <View style={styles.container}>
