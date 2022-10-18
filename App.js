@@ -12,6 +12,7 @@ import MatchScreen from "./Screens/MatchScreen";
 import GuideSignUpScreen from "./Screens/GuideSignUpScreen";
 import AlertPage from "./Screens/AlertPage";
 import OnlineGuidePage from "./Screens/OnlineGuidePage";
+import RHeader from "./Components/RHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,11 @@ const App = () => {
           <Stack.Screen name="알림함페이지" component={AlertPage} />
           <Stack.Screen name="매칭페이지" component={MatchScreen} />
           <Stack.Screen name="가이드매칭페이지" component={GuideSignUpScreen} />
-          <Stack.Screen name="메인페이지" component={MainPage} />
+          <Stack.Screen
+            name="메인페이지"
+            options={{ headerRight: () => <RHeader /> }}
+            component={MainPage}
+          />
           <Stack.Screen name="가이드리스트" component={GuideListPage} />
           <Stack.Screen name="디테일페이지" component={DetailPage} />
           <Stack.Screen name="온라인가이딩" component={OnlineGuidePage} />
