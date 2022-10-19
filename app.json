@@ -2,7 +2,7 @@
   "expo": {
     "name": "khack",
     "slug": "khack",
-    "version": "1.0.0",
+    "version": "2.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -26,6 +26,7 @@
         "backgroundColor": "#FFFFFF"
 
       },
+      "versionCode": 2,
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.harksulim.khack"
     },
