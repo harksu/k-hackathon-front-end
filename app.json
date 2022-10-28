@@ -26,7 +26,8 @@
         "backgroundColor": "#FFFFFF"
 
       },
-      "versionCode": 2,
+      "permissions": [],
+      "versionCode": 3,
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.harksulim.khack"
     },
